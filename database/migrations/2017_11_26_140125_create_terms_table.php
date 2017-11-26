@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Term;
 
-class CreateUsersTable extends Migration
+class CreateTermsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +14,12 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('terms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('username');
-            $table->string('password');
-            $table->boolean('admin')->default(false);
-            $table->integer('enrollment_id')->nullable();
-            $table->rememberToken();
+            $table->string('slug')->nullable();
+            $table->integer('enrollment_id');
+            $table->integer('amount');
+            $table->integer('state')->default(Term::STATE_OPEN);
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('terms');
     }
 }
