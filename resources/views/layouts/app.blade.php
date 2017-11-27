@@ -41,7 +41,7 @@
       </main>
 
       <footer class="footer">
-        <p>&copy; Company 2017</p>
+        <p>S.B.B.S. namens Scouting Raamsdonksveer, Kerklaan 22 4942AR Raamsdonksveer, KvK: 41100325, tel: 0162769096, mail: gok@scoutingrveer.nl.</p>
       </footer>
 
     </div>

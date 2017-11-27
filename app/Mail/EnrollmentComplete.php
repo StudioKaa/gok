@@ -34,6 +34,7 @@ class EnrollmentComplete extends Mailable
         if(!$enrollment) return redirect('home');
 
         return $this->subject('Scouting Raamsdonksveer - Inschrijving G.O.K.')
+            ->cc('gok@scoutingrveer.nl')
             ->replyTo('gok@scoutingrveer.nl', 'Team GOK')
             ->view('enrollments.email')
             ->with('payment', $this->payment)

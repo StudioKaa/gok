@@ -64,10 +64,10 @@ class ParticipantController extends Controller
             //set member_id if applicable
             if($participant->is_member)
             {
-                $member = Member::whereDate('Lid geboortedatum', $participant->birthday)->first();
-                if($member)
+                $member = Member::whereDate('Lid geboortedatum', $participant->birthday)->get();
+                if($member->count() == 1)
                 {
-                    $participant->member_id = $member->Lidnummer;
+                    $participant->member_id = $member->first()->Lidnummer;
                 }
             }
 
