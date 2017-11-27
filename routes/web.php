@@ -17,6 +17,11 @@ Route::redirect('/home', '/');
 Route::group(['middleware' => 'guest'], function() {
 	Route::get('/enrollments/create', 'EnrollmentController@create');
 	Route::post('/enrollments', 'EnrollmentController@store')->name('enrollments.create');
+
+	Route::group(['prefix' => 'admin'], function() {
+		Route::get('login', 'Auth\LoginController@showLoginForm')->name('admin.login');
+		Route::post('login', 'Auth\LoginController@login');
+	});
 });
 
 Route::group(['middleware' => 'auth'], function() {
@@ -30,9 +35,19 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/enrollments/{slug}/payment', 'EnrollmentController@payment_save')->name('enrollments.payment_save');
 	Route::get('/enrollments/{slug}', 'EnrollmentController@show')->name('enrollments.show');
 
+	Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
+
+		Route::view('/', 'admin.home')->name('admin.home');
+		
+		Route::group(['prefix' => 'admin'], function(){
+			//
+		});
+
+	});
+
 });
 
-Auth::routes();
+//Auth::routes();
 Route::get('/logout', function(){
 	Auth::logout();
 	return redirect('home');
