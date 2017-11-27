@@ -20,17 +20,18 @@
       <header class="header clearfix">
         <nav>
           <ul class="nav nav-pills float-right">
+          @if(!Auth::check())
             <li class="nav-item">
               <a class="nav-link {{{ (Request::is('/') ? 'active' : '') }}}" href="/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link {{{ (Request::is('enrollments/create') ? 'active' : '') }}}" href="/enrollments/create">Inschrijven</a>
             </li>
-            @if(Auth::check())
-              <li class="nav-item">
-                <span class="nav-link">{{ Auth::user()->name }}</span>
-              </li>
-            @endif
+          @else
+            <li class="nav-item">
+              <a href="/enrollments/{{ Auth::user()->enrollment->slug }}/continue" class="nav-link">{{ Auth::user()->name }}</a>
+            </li>
+          @endif
           </ul>
         </nav>
         <h3 class="text-muted">G.O.K. 2018</h3>

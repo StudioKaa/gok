@@ -67,10 +67,38 @@ class EnrollmentController extends Controller
         return redirect()->route('participants.create', [$enrollment->slug, $request->participants]);
     }
 
-    public function contact($slug)
+    public function continue($slug)
     {
         $enrollment = Enrollment::getBySlug($slug);
         if(!$enrollment) return redirect('home');
+
+        switch ($enrollment->state) {
+            case Enrollment::STATE_FILL_PARTICIPANTS:
+                return redirect()->route('participants.create', [$slug, 1]);
+                break;
+            
+            case Enrollment::STATE_FILL_CONTACT:
+                return redirect()->route('enrollments.contact', $slug);
+                break;
+
+            case Enrollment::STATE_FILL_PAYMENT:
+                return redirect()->route('enrollments.payment', $slug);
+                break;
+
+            case Enrollment::STATE_ENROLLED:
+                return redirect()->route('enrollments.show', $slug);
+                break;
+
+            default:
+                return redirect()->route('home');
+                break;
+        }
+    }
+
+    public function contact($slug)
+    {
+        $enrollment = Enrollment::getBySlug($slug);
+        if(!$enrollment || $enrollment->state != Enrollment::STATE_FILL_CONTACT) return redirect('home');
 
         $address = new Address();
 
@@ -171,7 +199,7 @@ class EnrollmentController extends Controller
     public function payment($slug)
     {
         $enrollment = Enrollment::getBySlug($slug);
-        if(!$enrollment) return redirect('home');
+        if(!$enrollment || $enrollment->state != Enrollment::STATE_FILL_PAYMENT) return redirect('home');
 
         return view('enrollments.payment')
             ->with('payment', $this->paymentLines($enrollment))
@@ -223,28 +251,24 @@ class EnrollmentController extends Controller
 
         Mail::to($enrollment->cp_email)->send(new \App\Mail\EnrollmentComplete($payment));
 
-        return redirect()->route('enrollments.finish', $enrollment->slug);
+        $request->session()->flash('finished');
+        return redirect()->route('enrollments.show', $enrollment->slug);
     }
-
-    public function finish($slug)
-    {
-        $enrollment = Enrollment::getBySlug($slug);
-        if(!$enrollment) return redirect('home');
-
-        return view('enrollments.finish')
-            ->with('payment', $this->paymentLines($enrollment))
-            ->with('enrollment', $enrollment);
-    }
-
+    
     /**
      * Display the specified resource.
      *
      * @param  \App\Enrollment  $enrollment
      * @return \Illuminate\Http\Response
      */
-    public function show(Enrollment $enrollment)
+    public function show($slug)
     {
-        //
+        $enrollment = Enrollment::getBySlug($slug);
+        if(!$enrollment || $enrollment->state < Enrollment::STATE_ENROLLED) return redirect('home');
+
+        return view('enrollments.show')
+            ->with('payment', $this->paymentLines($enrollment))
+            ->with('enrollment', $enrollment);
     }
 
     /**

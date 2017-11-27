@@ -15,7 +15,7 @@
         <legend>Kampeermiddel</legend>
         <ul>
             <li>U kunt ook aangeven dat u een tent wilt <strong>huren</strong>. U krijgt dan altijd een tent voor uw gezin alleen. Deze tent is in principe niet opgezet bij aankomst. Het huren van een tent kost &euro;15,-.</li>
-            <li><strong>Staf en explorers</strong>: wil je gebruik maken van de gratis gezamenlijke tent? Geef aan dat je met eigen tent komt, inventarisatie volgt later.</li>
+            <li><strong>Staf en explorers</strong>: wil je gebruik maken van de gratis gezamenlijke tent? Geef aan dat je met je eigen tent komt, inventarisatie volgt later.</li>
         </ul>
         <div class="form-group row">
             <label for="equipment" class="col-sm-3 col-form-label">Wij komen met een:</label>

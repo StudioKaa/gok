@@ -25,3 +25,24 @@ legend{
 form li{
 	list-style-type: circle;
 }
+
+.my-table{
+	background: lightgray;
+    padding: 30px 20px;
+    border-radius: 5px;
+}
+
+.my-table .badge{
+	font-size: 100%;
+	margin-bottom: 10px;
+}
+
+.my-table .my-header{
+	padding: 5px 0;
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+.my-header:first-child{
+	margin-top: 0;
+}
