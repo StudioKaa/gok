@@ -17,9 +17,9 @@
 </head>
 <body>
     <div class="container">
-      <header class="header clearfix">
+      <header class="header">
         <nav>
-          <ul class="nav nav-pills float-right">
+          <ul class="nav nav-pills">
           @if(!Auth::check())
             <li class="nav-item">
               <a class="nav-link {{{ (Request::is('/') ? 'active' : '') }}}" href="/">Home</a>

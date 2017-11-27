@@ -26,6 +26,13 @@ form li{
 	list-style-type: circle;
 }
 
+header{
+	display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .my-table{
 	background: lightgray;
     padding: 30px 20px;
@@ -37,6 +44,14 @@ form li{
 	margin-bottom: 10px;
 }
 
+.my-table .row > div{
+	margin-bottom: 10px;
+}
+
+.my-table .row > div > *{
+	display: block;
+}
+
 .my-table .my-header{
 	padding: 5px 0;
 	margin-top: 20px;
@@ -45,4 +60,15 @@ form li{
 
 .my-header:first-child{
 	margin-top: 0;
+}
+
+@media (max-width: 576px) {
+	h1{
+		font-size: 8vw;
+	}
+
+	header{
+		flex-direction: column-reverse;
+		margin-bottom: 1rem;
+	}
 }

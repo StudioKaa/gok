@@ -20,24 +20,24 @@
 @endif
 
 <div class="my-table">
-	<div class="row my-header">
-		<div class="col-4">Adres</div>
-		<div class="col-4">Contactpersoon</div>
-		<div class="col-4">Kampeermiddel</div>
-	</div>
 	<div class="row">
-		<div class="col-4">{{ $enrollment->address->title }}</div>
-		<div class="col-4">{{ $enrollment->cp()->name }}</div>
-		<div class="col-4">{{ ucfirst($enrollment->equipment) }}</div>
-	</div>
-	<div class="row">
-		<div class="col-4">{{ $enrollment->address->street }}</div>
-		<div class="col-4">{{ $enrollment->cp_email }}</div>
-		<div class="col-4">{{ ucfirst($enrollment->equipment_size) }}</div>
-	</div>
-	<div class="row">
-		<div class="col-4">{{ $enrollment->address->postal_code }} {{ $enrollment->address->city }}</div>
-		<div class="col-4">{{ $enrollment->cp_phone }}</div>
+		<div class="col-sm-4">
+			<strong>Adres</strong>
+			<span>{{ $enrollment->address->title }}</span>
+			<span>{{ $enrollment->address->street }}</span>
+			<span>{{ $enrollment->address->postal_code }} {{ $enrollment->address->city }}</span>
+		</div>
+		<div class="col-sm-4">
+			<strong>Contactpersoon</strong>
+			<span>{{ $enrollment->cp()->name }}</span>
+			<span>{{ $enrollment->cp_email }}</span>
+			<span>{{ $enrollment->cp_phone }}</span>
+		</div>
+		<div class="col-sm-4">
+			<strong>Kampeermiddel</strong>
+			<span>{{ ucfirst($enrollment->equipment) }}</span>
+			<span>{{ ucfirst($enrollment->equipment_size) }}</span>
+		</div>
 	</div>
 	<div class="row my-header">
 		<div class="col-12">Deelnemers</div>
@@ -55,17 +55,17 @@
 	<div class="row my-header">
 		<div class="col-12">Termijnen</div>
 	</div>
-	<div class="row">
-		<div class="col-3"><em>Datum:</em></div>
-		<div class="col-3"><em>Bedrag:</em></div>
-		<div class="col-3"><em>Betalingskenmerk:</em></div>
-		<div class="col-3 text-right"><em>Status:</em></div>
+	<div class="row d-none d-sm-flex">
+		<div class="col-sm-3"><em>Datum:</em></div>
+		<div class="col-sm-3"><em>Bedrag:</em></div>
+		<div class="col-sm-3"><em>Betalingskenmerk:</em></div>
+		<div class="col-sm-3 text-right"><em>Status:</em></div>
 	</div>
 	<div class="row">
-        <div class="col-3">Uiterlijk 1 februari:</div>
+        <div class="col-9 col-sm-3">Uiterlijk 1 februari:</div>
         <div class="col-3">&euro;{{ $enrollment->terms[0]->amount }},-</div>
-        <div class="col-3">GOK{{ $enrollment->terms[0]->slug }}</div>
-        <div class="col-3 text-right">
+        <div class="col-6 col-sm-3">GOK{{ $enrollment->terms[0]->slug }}</div>
+        <div class="col-6 col-sm-3 text-right">
         	@if($enrollment->terms[0]->state == App\Term::STATE_OPEN)
         		<span class="badge badge-warning">Nog niet betaald</span>
         	@else
@@ -88,6 +88,5 @@
 	    </div>
 	@endif
 </div>
-
 
 @endsection
