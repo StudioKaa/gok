@@ -18,6 +18,8 @@ class Enrollment extends Model
     const STATE_CANCELED = 4;
     const STATE_ARCHIVED = 5;
 
+    protected $appends = ['stateHTML', 'paymentHTML'];
+
     public function participants()
     {
     	return $this->hasMany(Participant::class);
@@ -45,15 +47,104 @@ class Enrollment extends Model
 
     public static function getBySlug($slug)
     {
-        if($slug == 'my' || Auth::user()->enrollment->slug == $slug)
-        {
-            return Auth::user()->enrollment;
-        }
-        elseif(Auth::user()->type == 'admin')
+        if(Auth::user()->admin)
         {
             return Enrollment::where('slug', $slug)->first();
         }
+        elseif($slug == 'my' || Auth::user()->enrollment->slug == $slug)
+        {
+            return Auth::user()->enrollment;
+        }
+        else
         
         return false;
+    }
+
+    public function getStateHTMLAttribute()
+    {
+        switch ($this->state) {
+            case Enrollment::STATE_FILL_PARTICIPANTS:
+                return array(
+                    'color' => 'warning',
+                    'title' => 'Vul deeln in'
+                );
+                break;
+
+            case Enrollment::STATE_FILL_CONTACT:
+                return array(
+                    'color' => 'warning',
+                    'title' => 'Vul cp in'
+                );
+                break;
+
+            case Enrollment::STATE_FILL_PARTICIPANTS:
+                return array(
+                    'color' => 'warning',
+                    'title' => 'Vul betaling in'
+                );
+                break;
+            
+            case Enrollment::STATE_ENROLLED:
+                return array(
+                    'color' => 'success',
+                    'title' => 'Aangemeld'
+                );
+                break;
+
+            case Enrollment::STATE_CANCELED:
+                return array(
+                    'color' => 'danger',
+                    'title' => 'Geannuleerd'
+                );
+                break;
+
+            case Enrollment::STATE_ARCHIVED:
+                return array(
+                    'color' => 'secondary',
+                    'title' => 'Gearchiveerd'
+                );
+                break;
+
+            default:
+                return array(
+                    'color' => 'secondary',
+                    'title' => 'Onbekend'
+                );
+                break;
+        }
+    }
+
+    public function getPaymentHTMLAttribute()
+    {
+        $count['open'] = count($this->terms->where('state', Term::STATE_OPEN));
+        $count['payed'] = count($this->terms->where('state', Term::STATE_PAYED));
+
+        if(!$count['payed'])
+        {
+            return array(
+                'color' => 'danger',
+                'title' => 'Open'
+            );
+        }
+        elseif($count['payed'] > 0 && $count['open'] > 0)
+        {
+            return array(
+                'color' => 'warning',
+                'title' => 'Gestart'
+            );
+        }
+        elseif($count['payed'] >= 1 && $count['open'] < 1)
+        {
+            return array(
+                'color' => 'success',
+                'title' => 'Betaald'
+            );
+        }
+        else{
+            return array(
+                'color' => 'secondary',
+                'title' => 'Onbekend'
+            );
+        }
     }
 }

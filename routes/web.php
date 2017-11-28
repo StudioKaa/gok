@@ -38,10 +38,9 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
 
 		Route::view('/', 'admin.home')->name('admin.home');
-		
-		Route::group(['prefix' => 'admin'], function(){
-			//
-		});
+		Route::get('/enrollments', 'Admin\EnrollmentController@index')->name('admin.enrollments.index');
+		Route::get('/participants', 'ParticipantController@index')->name('admin.participants.index');
+		Route::get('/terms', 'Admin\TermController@index')->name('admin.terms.index');
 
 	});
 

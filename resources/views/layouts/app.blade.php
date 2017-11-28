@@ -20,7 +20,7 @@
       <header class="header">
         <nav>
           <ul class="nav nav-pills">
-          @if(!Auth::check())
+          @if(!Auth::check() || Auth::user()->admin)
             <li class="nav-item">
               <a class="nav-link {{{ (Request::is('/') ? 'active' : '') }}}" href="/">Home</a>
             </li>

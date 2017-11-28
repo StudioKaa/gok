@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Term;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TermController extends Controller
 {

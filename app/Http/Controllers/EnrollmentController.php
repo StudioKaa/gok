@@ -13,32 +13,11 @@ use Mail;
 
 class EnrollmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('enrollments.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate(request(), [
@@ -255,12 +234,6 @@ class EnrollmentController extends Controller
         return redirect()->route('enrollments.show', $enrollment->slug);
     }
     
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Enrollment  $enrollment
-     * @return \Illuminate\Http\Response
-     */
     public function show($slug)
     {
         $enrollment = Enrollment::getBySlug($slug);
@@ -269,39 +242,5 @@ class EnrollmentController extends Controller
         return view('enrollments.show')
             ->with('payment', $this->paymentLines($enrollment))
             ->with('enrollment', $enrollment);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Enrollment  $enrollment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Enrollment $enrollment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Enrollment  $enrollment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Enrollment $enrollment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Enrollment  $enrollment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Enrollment $enrollment)
-    {
-        //
     }
 }
