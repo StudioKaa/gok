@@ -35,10 +35,9 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('/enrollments/{slug}/payment', 'EnrollmentController@payment_save')->name('enrollments.payment_save');
 	Route::get('/enrollments/{slug}', 'EnrollmentController@show')->name('enrollments.show');
 
-	Route::view('/admin', 'admin.home')->name('admin.home');
 	Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
 
-		//Route::view('/', 'admin.home')->name('admin.home');
+		Route::redirect('/', '/admin/enrollments')->name('admin.home');
 		Route::get('/enrollments', 'Admin\EnrollmentController@index')->name('admin.enrollments.index');
 		Route::get('/participants', 'ParticipantController@index')->name('admin.participants.index');
 		Route::get('/terms', 'Admin\TermController@index')->name('admin.terms.index');
