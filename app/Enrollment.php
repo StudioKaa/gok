@@ -77,7 +77,7 @@ class Enrollment extends Model
                 );
                 break;
 
-            case Enrollment::STATE_FILL_PARTICIPANTS:
+            case Enrollment::STATE_FILL_PAYMENT:
                 return array(
                     'color' => 'warning',
                     'title' => 'Vul betaling in'

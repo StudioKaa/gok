@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Term;
+use App\Enrollment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,72 +16,18 @@ class TermController extends Controller
      */
     public function index()
     {
-        //
+        $terms = Term::whereHas('enrollment', function($query){
+            $query->where('state', '<', Enrollment::STATE_CANCELED);
+        })->get();
+
+        return view('admin.terms.index')
+            ->with('terms', $terms);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function pay(Term $term)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Term  $term
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Term $term)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Term  $term
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Term $term)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Term  $term
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Term $term)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Term  $term
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Term $term)
-    {
-        //
+        $term->state = Term::STATE_PAYED;
+        $term->save();
+        return redirect()->back();
     }
 }

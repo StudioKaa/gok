@@ -40,11 +40,17 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::redirect('/', '/admin/enrollments')->name('admin.home');
 		Route::get('/enrollments', 'Admin\EnrollmentController@index')->name('admin.enrollments.index');
 		Route::get('/participants', 'ParticipantController@index')->name('admin.participants.index');
+		
 		Route::get('/terms', 'Admin\TermController@index')->name('admin.terms.index');
+		Route::get('/terms/{term}/pay', 'Admin\TermController@pay')->name('admin.terms.pay');
 
 	});
 
 });
+
+Route::get('/ideal/pay/{slug}', 'IdealController@redirect')->name('ideal.pay');
+Route::get('/ideal/finish/{slug}', 'IdealController@finish')->name('ideal.finish');
+Route::get('/ideal/webhook', 'IdealController@webhook');
 
 //Auth::routes();
 Route::get('/logout', function(){
