@@ -30,10 +30,10 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="equipment_size" class="col-sm-3 col-form-label">Lengte of grootte:</label>
+            <label for="equipment_size" class="col-sm-3 col-form-label">Afmetingen:</label>
             <div class="col-sm-9">
                 <input type="text" name="equipment_size" id="equipment_size" class="form-control">
-                <small class="form-text text-muted">Voor caravans, vouwwagens of campers: lengte van dissel tot achterzijde.</small>
+                <small class="form-text text-muted">Voor caravans of campers: lengte van dissel tot achterzijde.</small>
             </div>
         </div>
     </fieldset>
