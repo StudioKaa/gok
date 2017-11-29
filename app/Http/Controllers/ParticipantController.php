@@ -28,7 +28,7 @@ class ParticipantController extends Controller
     public function create(Request $request, $slug, $n)
     {
         $enrollment = Enrollment::getBySlug($slug);
-        if(!$enrollment) return redirect('home');
+        if(!$enrollment || $enrollment->state != Enrollment::STATE_FILL_PARTICIPANTS) return redirect('home');
 
         return view('participants.create')
             ->with('enrollment', $enrollment)
@@ -50,7 +50,7 @@ class ParticipantController extends Controller
         ]);
 
         $enrollment = Enrollment::getBySlug($slug);
-        if(!$enrollment) return redirect('home');
+        if(!$enrollment || $enrollment->state != Enrollment::STATE_FILL_PARTICIPANTS) return redirect('home');
         
         foreach($request->participants as $i => $p)
         {

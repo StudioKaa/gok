@@ -54,7 +54,7 @@ class EnrollmentController extends Controller
 
         switch ($enrollment->state) {
             case Enrollment::STATE_FILL_PARTICIPANTS:
-                return redirect()->route('participants.create', [$slug, 1]);
+                return redirect()->route('participants.create', [$slug, $request->session()->get('participants')]);
                 break;
             
             case Enrollment::STATE_FILL_CONTACT:
@@ -112,6 +112,9 @@ class EnrollmentController extends Controller
 
     public function contact_save(Request $request, $slug)
     {
+        $enrollment = Enrollment::getBySlug($slug);
+        if(!$enrollment || $enrollment->state != Enrollment::STATE_FILL_CONTACT) return redirect('home');
+
         $this->validate(request(), [
             'cp_email' => 'required|email',
             'cp_phone' => 'required|string|size:10',
@@ -121,7 +124,6 @@ class EnrollmentController extends Controller
             'city' => 'required|string',
         ]);
 
-        $enrollment = Enrollment::getBySlug($slug);
         $enrollment->cp_email = $request->cp_email;
         $enrollment->cp_phone = $request->cp_phone;
         $enrollment->state = Enrollment::STATE_FILL_PAYMENT;
@@ -189,7 +191,7 @@ class EnrollmentController extends Controller
     public function payment_save(Request $request, $slug)
     {
         $enrollment = Enrollment::getBySlug($slug);
-        if(!$enrollment) return redirect('home');
+        if(!$enrollment || $enrollment->state != Enrollment::STATE_FILL_PAYMENT) return redirect('home');
 
         $this->validate(request(), [
             'terms' => 'required|between:1,2',
