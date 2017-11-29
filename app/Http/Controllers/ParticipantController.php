@@ -25,14 +25,14 @@ class ParticipantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($slug, $n)
+    public function create(Request $request, $slug, $n)
     {
         $enrollment = Enrollment::getBySlug($slug);
         if(!$enrollment) return redirect('home');
 
         return view('participants.create')
             ->with('enrollment', $enrollment)
-            ->with('n', $n);
+            ->with('n', $request->session()->get('participants'));
     }
 
     /**

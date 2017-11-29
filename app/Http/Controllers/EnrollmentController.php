@@ -43,6 +43,7 @@ class EnrollmentController extends Controller
         $user->save();
         Auth::login($user);
 
+        $request->session()->put('participants', $request->participants);
         return redirect()->route('participants.create', [$enrollment->slug, $request->participants]);
     }
 
