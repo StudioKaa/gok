@@ -36,7 +36,7 @@
     <fieldset>
         <legend>Adres</legend>
         <div class="form-group row">
-            <label for="title" class="col-sm-3 col-form-label">Aanspreektitel:</label>
+            <label for="title" class="col-sm-3 col-form-label">(Familie)naam:</label>
             <div class="col-sm-9">
                 <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $address->title) }}">
             </div>
