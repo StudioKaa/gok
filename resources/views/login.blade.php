@@ -42,9 +42,7 @@
 
         <div class="form-group">
             <div class="col-md-8 col-md-offset-4">
-                <button type="submit" class="btn btn-primary">
-                    Bekijken
-                </button>
+                <button type="submit" class="btn btn-primary">Bekijken</button>
                 <a href="{{ route('admin.login') }}" class="btn btn-secondary">Naar admin login</a>
             </div>
         </div>

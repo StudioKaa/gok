@@ -53,7 +53,8 @@ body {
 }
 
 h1{
-  font-family: Impact;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
 }
 
 /* Supporting marketing content */
