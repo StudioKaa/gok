@@ -45,8 +45,14 @@ class IdealController extends Controller
             $term->save();
             $request->session()->flash('ideal_payed');
         }
-
-        $request->session()->flash('ideal_error');
+		elseif($payment->isOpen() || $payment->isPending())
+		{
+			$request->session()->flash('ideal_pending');
+		}
+		else
+		{
+			$request->session()->flash('ideal_error');
+		}
         return redirect()->route('enrollments.show', $term->enrollment->slug);
     }
 
