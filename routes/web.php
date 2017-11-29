@@ -12,7 +12,22 @@
 */
 
 Route::redirect('/home', '/');
-Route::view('/', 'home')->name('home');
+Route::get('/', function(){
+
+	if(!Auth::check())
+	{
+		return view('home');
+	}
+	elseif (Auth::user()->enrollment->state < \App\Enrollment::STATE_ENROLLED)
+	{
+		return redirect('/enrollments/my/continue');
+	}
+	else
+	{
+		return redirect('/enrollments/my');
+	}
+
+})->name('home');
 
 Route::group(['middleware' => 'guest'], function() {
 
