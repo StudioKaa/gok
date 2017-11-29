@@ -12,10 +12,9 @@
 */
 
 Route::redirect('/home', '/');
+Route::view('/', 'home')->name('home');
 
 Route::group(['middleware' => 'guest'], function() {
-	
-	Route::view('/', 'home')->name('home');
 
 	Route::get('/enrollments/create', 'EnrollmentController@create');
 	Route::post('/enrollments', 'EnrollmentController@store')->name('enrollments.create');
