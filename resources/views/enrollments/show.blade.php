@@ -5,7 +5,7 @@
 
 @if(Request::session()->has('finished'))
 	<div class="alert alert-success">
-	    <p>Yes, de inschrijving is afgerond!</p>
+	    <p>Yes, de inschrijving is afgerond! Je kunt direct betalen met iDEAL, klik hieronder op <em>Betaal nu met iDEAL</em>.</p>
 	</div>
 @elseif(Request::session()->has('ideal_payed'))
 	<div class="alert alert-success">
