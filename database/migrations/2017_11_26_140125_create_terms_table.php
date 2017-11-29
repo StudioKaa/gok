@@ -18,8 +18,9 @@ class CreateTermsTable extends Migration
             $table->increments('id');
             $table->string('slug')->nullable();
             $table->integer('enrollment_id');
-            $table->integer('amount');
+            $table->decimal('amount', 10, 2);
             $table->string('mollie_id')->nullable();
+            $table->string('date');
             $table->integer('state')->default(Term::STATE_OPEN);
             $table->timestamps();
         });

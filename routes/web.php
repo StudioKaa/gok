@@ -74,7 +74,6 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::get('/ideal/webhook', 'IdealController@webhook');
 
-//Auth::routes();
 Route::get('/logout', function(){
 	Auth::logout();
 	return redirect('home');

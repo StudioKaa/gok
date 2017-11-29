@@ -15,7 +15,7 @@ class IdealController extends Controller
         if($term->state == Term::STATE_OPEN)
     	{
     		 $payment = Mollie::api()->payments()->create([
-	            "amount"      => $term->amount + 0.29	,
+	            "amount"      => $term->amount,
 	            "description" => "Scouting Rveer GOK" . $term->slug,
 	            "redirectUrl" => url('ideal/finish/' . $term->slug),
 	           	"method"	  => 'ideal',
@@ -53,6 +53,8 @@ class IdealController extends Controller
 		{
 			$request->session()->flash('ideal_error');
 		}
+		
+		$request->session()->reflash();
         return redirect()->route('enrollments.show', $term->enrollment->slug);
     }
 

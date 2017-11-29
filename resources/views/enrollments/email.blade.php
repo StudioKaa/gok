@@ -3,15 +3,18 @@
 <p>Uw inschrijving is succesvol afgerond. Bewaar deze mail goed, het inschrijfnummer is belangrijk! Met vragen kunt u altijd mailen naar gok@scoutingrveer.nl.</p>
 
 <h3>Betaalinstructie</h3>
-<p>U kunt ook <a href="{{ url('/login/' . $base64) . '/pay' }}">direct online betalen met iDEAL</a>.</p>
+@foreach($enrollment->terms as $term)
+    <p>Termijn van &euro;{{ $term->amount }} te betalen uiterlijk {{ $term->date }} - 
+    @if($term->state == \App\Term::STATE_OPEN)
+        maak het bedrag over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <em>GOK{{ $term->slug }}</em>.</p>
+    @else
+        <strong>de betaling is al afgerond</strong>.
+    @endif
+    </p>
+@endforeach
 
-@if(count($enrollment->terms) == 1)
-    <p>U heeft ervoor gekozen om in &eacute;&eacute;n keer te betalen.</p>
-    <p>Maak zo snel mogelijk, maar uiterlijk 1 februari het bedrag van <strong>&euro;{{ $payment['total'] }},-</strong> over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <strong>GOK{{ $enrollment->terms[0]->slug }}</strong></p>
-@else
-    <p>U heeft ervoor gekozen om in twee termijnen te betalen.</p>
-    <p>Maak zo snel mogelijk, maar uiterlijk 1 februari het bedrag van <strong>&euro;{{ $enrollment->terms[0]->amount }},-</strong> over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <strong>GOK{{ $enrollment->terms[0]->slug }}</strong></p>
-    <p>Maak uiterlijk 1 mei het bedrag van <strong>&euro;{{ $enrollment->terms[1]->amount }},-</strong> over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <strong>GOK{{ $enrollment->terms[1]->slug }}</strong></p>
+@if($enrollment->paymentHTML['color'] != 'success')
+    <p>U kunt ook <a href="{{ url('/login/' . $base64) }}">direct online betalen met iDEAL</a>.</p>
 @endif
 
 <h3>Overzicht inschrijving</h3>

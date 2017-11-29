@@ -137,7 +137,7 @@ class EnrollmentController extends Controller
         return redirect()->route('enrollments.payment', $enrollment->slug);
     }
 
-    private function paymentLines($enrollment)
+    public static function paymentLines($enrollment)
     {
         $lines = array();
         $total = 0;
@@ -191,56 +191,75 @@ class EnrollmentController extends Controller
         if(!$enrollment) return redirect('home');
 
         $this->validate(request(), [
-            'terms' => 'required|between:1,2'
+            'terms' => 'required|between:1,2',
+            'method' => 'required'
         ]);
 
         $payment = $this->paymentLines($enrollment);
         $total = $payment['total'];
-        $rand = rand(100,999);
 
         if($request->terms == 1)
         {
             $term = new Term();
             $term->enrollment_id = $enrollment->id;
-            $term->amount = $total;
+            $term->amount = $total + 0.20;
+            $term->date = '1 februari';
             $term->save();
 
-            $term->slug = sprintf("%03d%03d", $rand, $term->id);
+            $term->slug = $enrollment->slug . '-1';
             $term->save();
         }
         elseif($request->terms == 2)
         {
             $term1 = new Term();
             $term1->enrollment_id = $enrollment->id;
-            $term1->amount = floor($total/2);
+            $term1->amount = floor($total/2) + 0.20;
+            $term1->date = '1 februari';
             $term1->save();
-            $term1->slug = sprintf("%03d%03d", $rand, $term1->id);
+            $term1->slug = $enrollment->slug . '-1';
             $term1->save();
 
             $term2 = new Term();
             $term2->enrollment_id = $enrollment->id;
-            $term2->amount = ceil($total/2);
+            $term2->amount = ceil($total/2) + 0.20;
+            $term2->date = '1 mei';
             $term2->save();
-            $term2->slug = sprintf("%03d%03d", $rand, $term2->id);
+            $term2->slug = $enrollment->slug . '-2';
             $term2->save();
         }
 
         $enrollment->state = Enrollment::STATE_ENROLLED;
         $enrollment->save();
+        
 
-        Mail::to($enrollment->cp_email)->send(new \App\Mail\EnrollmentComplete($payment));
+        if($request->method == 'ideal')
+        {
+            $request->session()->put('finished', 'ideal');
+            return redirect()->route('ideal.pay', $enrollment->terms[0]->slug);
+        }
 
-        $request->session()->flash('finished');
+        $request->session()->put('finished', 'bank');
         return redirect()->route('enrollments.show', $enrollment->slug);
     }
     
-    public function show($slug)
+    public function show(Request $request, $slug)
     {
         $enrollment = Enrollment::getBySlug($slug);
         if(!$enrollment || $enrollment->state < Enrollment::STATE_ENROLLED) return redirect('home');
 
+        $payment = $this->paymentLines($enrollment);
+        $finished = false;
+
+        if($request->session()->has('finished'))
+        {
+            $finished = $request->session()->get('finished');
+            Mail::to($enrollment->cp_email)->send(new \App\Mail\EnrollmentComplete($enrollment, $payment));
+            $request->session()->forget('finished');
+        }
+
         return view('enrollments.show')
-            ->with('payment', $this->paymentLines($enrollment))
+            ->with('payment', $payment)
+            ->with('finished', $finished)
             ->with('enrollment', $enrollment);
     }
 }

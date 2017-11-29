@@ -16,7 +16,7 @@
         <td>&euro;{{ $line['price'] }},-</td>
     </tr>
     @endforeach
-    <tr class="bg-secondary">
+    <tr class="bg-light">
         <td><strong>Totaal</strong></td>
         <td><strong>&euro;{{ $payment['total'] }},-</strong></td>
     </tr>
@@ -26,13 +26,21 @@
     {{ csrf_field() }}
     <fieldset>
         <legend>Betaalwijze</legend>
-        <p>Uiterlijk <strong>1 februari</strong> moet het kampgeld betaald worden. U kunt ervoor kiezen dit in één keer te doen, of in twee termijnen. U betaalt dan uiterlijk 1 februari de helft van het kampgeld, en uiterlijk 1 mei de andere helft.</p>
         <div class="form-group row">
             <label for="terms" class="col-sm-3 col-form-label">Termijnen:</label>
             <div class="col-sm-9">
                 <select name="terms" id="terms" class="form-control">
-                    <option value="1">Ik betaal in &eacute;&eacute;n keer</option>
-                    <option value="2">Ik betaal in twee termijnen</option>
+                    <option value="1">Ik betaal in &eacute;&eacute;n keer (uiterlijk 1 februari, &euro;0,20 transactiekosten)</option>
+                    <option value="2">Ik betaal in twee termijnen (uiterlijk 1 februari / 1 mei, &euro;0,40 transactiekosten)</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="method" class="col-sm-3 col-form-label">Methode:</label>
+            <div class="col-sm-9">
+                <select name="method" id="method" class="form-control">
+                    <option value="ideal">Ik betaal met iDEAL</option>
+                    <option value="bank">Ik maak het geld zelf over</option>
                 </select>
             </div>
         </div>
