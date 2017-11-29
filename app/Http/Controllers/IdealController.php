@@ -12,21 +12,27 @@ class IdealController extends Controller
     {
         $term = Term::where('slug', $slug)->first();
 
-        $payment = Mollie::api()->payments()->create([
-            "amount"      => $term->amount + 0.29	,
-            "description" => "Scouting Rveer GOK" . $term->slug,
-            "redirectUrl" => url('ideal/finish/' . $term->slug),
-            //"webhookUrl"  => url('ideal/webhook'),
-           	"method"	  => 'ideal',
-           	"metadata" 	  => json_encode([
-           		'term_id' => $term->id
-           	])
-        ]);
+        if($term->state == Term::STATE_OPEN)
+    	{
+    		 $payment = Mollie::api()->payments()->create([
+	            "amount"      => $term->amount + 0.29	,
+	            "description" => "Scouting Rveer GOK" . $term->slug,
+	            "redirectUrl" => url('ideal/finish/' . $term->slug),
+	            //"webhookUrl"  => url('ideal/webhook'),
+	           	"method"	  => 'ideal',
+	           	"metadata" 	  => json_encode([
+	           		'term_id' => $term->id
+	           	])
+	        ]);
 
-        $term->mollie_id = $payment->id;
-        $term->save();
-  
-        return redirect($payment->links->paymentUrl);
+	        $term->mollie_id = $payment->id;
+	        $term->save();
+	  
+	        return redirect($payment->links->paymentUrl);
+    	}
+
+    	return redirect()->back();
+
     }
 
     public function finish(Request $request, $slug)
