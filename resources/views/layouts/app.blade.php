@@ -28,7 +28,7 @@
               <a class="nav-link {{{ (Request::is('enrollments/create') ? 'active' : '') }}}" href="/enrollments/create">Inschrijven</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{{ (Request::is('login') ? 'active' : '') }}}" href="/login">Login</a>
+              <a class="nav-link {{{ (Request::is('login') ? 'active' : '') }}}" href="/login">Mijn inschrijving</a>
             </li>
           @else
             <li class="nav-item">
