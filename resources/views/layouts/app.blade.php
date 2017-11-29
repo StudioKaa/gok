@@ -27,6 +27,9 @@
             <li class="nav-item">
               <a class="nav-link {{{ (Request::is('enrollments/create') ? 'active' : '') }}}" href="/enrollments/create">Inschrijven</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link {{{ (Request::is('login') ? 'active' : '') }}}" href="/login">Login</a>
+            </li>
           @else
             <li class="nav-item">
               <a href="/enrollments/{{ Auth::user()->enrollment->slug }}/continue" class="nav-link">{{ Auth::user()->name }}</a>

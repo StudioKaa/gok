@@ -28,13 +28,13 @@ class LoginController extends Controller
         return $this->login($request->slug, $request->email);
     }
 
-    public function login_base64($base64)
+    public function login_decode($base64, $action = null)
     {
         $data = json_decode(base64_decode($base64));
-        $this->login($data->slug, $data->email);
+        return $this->login($data->slug, $data->email, $action);
     }
 
-    private function login($slug, $email)
+    private function login($slug, $email, $action = null)
     {
 
         $enrollment = Enrollment::where('slug', $slug)->first();
@@ -49,6 +49,15 @@ class LoginController extends Controller
         }
 
         Auth::login($enrollment->user);
-        return redirect()->route('enrollments.show', $enrollment->slug);
+
+        switch ($action) {
+            case 'pay':
+                return redirect()->route('ideal.pay', $enrollment->terms[0]->slug);
+                break;
+            
+            default:
+                return redirect()->route('enrollments.show', $enrollment->slug);
+                break;
+        }
     }
 }

@@ -87,17 +87,19 @@
 	@endif
 </div>
 
-<div class="alert alert-success mt-4">
-	<h3>Betaalinstructie</h3>
-	@if(count($enrollment->terms) == 1)
-	    <p>Klik hierboven op <em>Betaal nu met iDEAL</em>, of maak het bedrag over:</p>
-	    <p>Maak zo snel mogelijk, maar uiterlijk 1 februari het bedrag van <strong>&euro;{{ $payment['total'] }},-</strong> over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <strong>GOK{{ $enrollment->terms[0]->slug }}</strong></p>
-	@else
-	    <p>Klik hierboven op <em>Betaal nu met iDEAL</em>, of maak het bedrag over:</p>
-	    <p>Maak zo snel mogelijk, maar uiterlijk 1 februari het bedrag van <strong>&euro;{{ $enrollment->terms[0]->amount }},-</strong> over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <strong>GOK{{ $enrollment->terms[0]->slug }}</strong></p>
-	    <p>Maak uiterlijk 1 mei het bedrag van <strong>&euro;{{ $enrollment->terms[1]->amount }},-</strong> over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <strong>GOK{{ $enrollment->terms[1]->slug }}</strong></p>
-	@endif
-	<p>U ontvangt de betaalinstructie ook op het e-mailadres van de contactpersoon.</p>
-</div>
+@if($enrollment->paymentHTML['color'] != 'success')
+	<div class="alert alert-success mt-4">
+		<h3>Betaalinstructie</h3>
+		@if(count($enrollment->terms) == 1)
+		    <p>Klik hierboven op <em>Betaal nu met iDEAL</em>, of maak het bedrag over:</p>
+		    <p>Maak zo snel mogelijk, maar uiterlijk 1 februari het bedrag van <strong>&euro;{{ $payment['total'] }},-</strong> over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <strong>GOK{{ $enrollment->terms[0]->slug }}</strong></p>
+		@else
+		    <p>Klik hierboven op <em>Betaal nu met iDEAL</em>, of maak het bedrag over:</p>
+		    <p>Maak zo snel mogelijk, maar uiterlijk 1 februari het bedrag van <strong>&euro;{{ $enrollment->terms[0]->amount }},-</strong> over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <strong>GOK{{ $enrollment->terms[0]->slug }}</strong></p>
+		    <p>Maak uiterlijk 1 mei het bedrag van <strong>&euro;{{ $enrollment->terms[1]->amount }},-</strong> over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <strong>GOK{{ $enrollment->terms[1]->slug }}</strong></p>
+		@endif
+		<p>U ontvangt de betaalinstructie ook op het e-mailadres van de contactpersoon.</p>
+	</div>
+@endif
 
 @endsection

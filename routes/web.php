@@ -11,16 +11,19 @@
 |
 */
 
-Route::view('/', 'home')->name('home');
 Route::redirect('/home', '/');
 
 Route::group(['middleware' => 'guest'], function() {
+	
+	Route::view('/', 'home')->name('home');
+
 	Route::get('/enrollments/create', 'EnrollmentController@create');
 	Route::post('/enrollments', 'EnrollmentController@store')->name('enrollments.create');
 
 	Route::get('/login', 'LoginController@showLoginForm')->name('login');
 	Route::post('/login', 'LoginController@login_form');
 	Route::get('/login/{base64}', 'LoginController@login_decode');
+	Route::get('/login/{base64}/{action}', 'LoginController@login_decode');
 
 	Route::group(['prefix' => 'admin'], function() {
 		Route::get('login', 'Admin\LoginController@showLoginForm')->name('admin.login');

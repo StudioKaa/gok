@@ -33,11 +33,17 @@ class EnrollmentComplete extends Mailable
         $enrollment = Auth::user()->enrollment;
         if(!$enrollment) return redirect('home');
 
+        $base64 = base64_encode(json_encode(array(
+            'slug' => $enrollment->slug,
+            'email' => $enrollment->cp_email
+        )));
+
         return $this->subject('Scouting Raamsdonksveer - Inschrijving G.O.K.')
             ->cc('gok@scoutingrveer.nl')
             ->replyTo('gok@scoutingrveer.nl', 'Team GOK')
             ->view('enrollments.email')
             ->with('payment', $this->payment)
-            ->with('enrollment', $enrollment);
+            ->with('enrollment', $enrollment)
+            ->with('base64', $base64);
     }
 }

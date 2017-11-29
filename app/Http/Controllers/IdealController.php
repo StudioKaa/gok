@@ -18,7 +18,6 @@ class IdealController extends Controller
 	            "amount"      => $term->amount + 0.29	,
 	            "description" => "Scouting Rveer GOK" . $term->slug,
 	            "redirectUrl" => url('ideal/finish/' . $term->slug),
-	            //"webhookUrl"  => url('ideal/webhook'),
 	           	"method"	  => 'ideal',
 	           	"metadata" 	  => json_encode([
 	           		'term_id' => $term->id

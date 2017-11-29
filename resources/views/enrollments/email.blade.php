@@ -1,8 +1,10 @@
 <h1>Inschrijving #GOK{{ $enrollment->slug }}</h1>
 
-<p>Uw inschrijving is succesvol afgerond. Bewaar deze mail goed! Met vragen kunt u altijd mailen naar gok@scoutingrveer.nl.</p>
+<p>Uw inschrijving is succesvol afgerond. Bewaar deze mail goed, het inschrijfnummer is belangrijk! Met vragen kunt u altijd mailen naar gok@scoutingrveer.nl.</p>
 
 <h3>Betaalinstructie</h3>
+<p>U kunt ook <a href="{{ url('/login/' . $base64) . '/pay' }}">direct online betalen met iDEAL</a>.</p>
+
 @if(count($enrollment->terms) == 1)
     <p>U heeft ervoor gekozen om in &eacute;&eacute;n keer te betalen.</p>
     <p>Maak zo snel mogelijk, maar uiterlijk 1 februari het bedrag van <strong>&euro;{{ $payment['total'] }},-</strong> over naar de contributierekening: NL27RABO0143010840 onder vermelding van het betalingskenmerk: <strong>GOK{{ $enrollment->terms[0]->slug }}</strong></p>
