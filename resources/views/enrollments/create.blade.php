@@ -33,7 +33,7 @@
             <label for="equipment_size" class="col-sm-3 col-form-label">Afmetingen:</label>
             <div class="col-sm-9">
                 <input type="text" name="equipment_size" id="equipment_size" class="form-control">
-                <small class="form-text text-muted">Voor caravans of campers: lengte van dissel tot achterzijde.</small>
+                <small class="form-text text-muted">Afmeting kampeermiddel in strekkende meters.</small>
             </div>
         </div>
     </fieldset>
