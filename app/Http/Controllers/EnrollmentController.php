@@ -48,7 +48,7 @@ class EnrollmentController extends Controller
         return redirect()->route('participants.create', [$enrollment->slug, $request->participants]);
     }
 
-    public function continue($slug)
+    public function continue(Request $request, $slug)
     {
         $enrollment = Enrollment::getBySlug($slug);
         if(!$enrollment) return redirect('home');
