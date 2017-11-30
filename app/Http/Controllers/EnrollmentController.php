@@ -10,6 +10,7 @@ use App\Member;
 use App\Term;
 use Illuminate\Support\Facades\Auth;
 use Mail;
+use Carbon\Carbon;
 
 class EnrollmentController extends Controller
 {
@@ -170,6 +171,14 @@ class EnrollmentController extends Controller
                 'price' => '15'
             );
             $total += 15;
+        }
+
+        if($enrollment->created_at < new Carbon('2018-03-01'))
+        {
+            $lines[] = array(
+                'name' => "Gratis muntje voor early-bird",
+                'price' => '0'
+            );
         }
 
         return array(
