@@ -214,7 +214,7 @@ class EnrollmentController extends Controller
         {
             $term = new Term();
             $term->enrollment_id = $enrollment->id;
-            $term->amount = $total + 0.20;
+            $term->amount = $total;
             $term->date = '1 februari';
             $term->save();
 
@@ -225,7 +225,7 @@ class EnrollmentController extends Controller
         {
             $term1 = new Term();
             $term1->enrollment_id = $enrollment->id;
-            $term1->amount = floor($total/2) + 0.20;
+            $term1->amount = floor($total/2);
             $term1->date = '1 februari';
             $term1->save();
             $term1->slug = $enrollment->slug . '-1';
@@ -233,7 +233,7 @@ class EnrollmentController extends Controller
 
             $term2 = new Term();
             $term2->enrollment_id = $enrollment->id;
-            $term2->amount = ceil($total/2) + 0.20;
+            $term2->amount = ceil($total/2);
             $term2->date = '1 mei';
             $term2->save();
             $term2->slug = $enrollment->slug . '-2';
