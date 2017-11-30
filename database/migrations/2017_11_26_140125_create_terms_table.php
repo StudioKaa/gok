@@ -17,7 +17,7 @@ class CreateTermsTable extends Migration
         Schema::create('terms', function (Blueprint $table) {
             $table->increments('id');
             $table->string('slug')->nullable();
-            $table->integer('enrollment_id');
+            $table->integer('enrollment_id')->unsigned();
             $table->decimal('amount', 10, 2);
             $table->string('mollie_id')->nullable();
             $table->string('date');

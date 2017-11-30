@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->boolean('admin')->default(false);
-            $table->integer('enrollment_id')->nullable();
+            $table->integer('enrollment_id')->nullable()->unsigned();
             $table->rememberToken();
             $table->timestamps();
 
