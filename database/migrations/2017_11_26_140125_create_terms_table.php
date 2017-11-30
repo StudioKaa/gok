@@ -24,6 +24,10 @@ class CreateTermsTable extends Migration
             $table->integer('state')->default(Term::STATE_OPEN);
             $table->timestamps();
         });
+
+        $table->foreign('enrollment_id')
+                    ->references('id')->on('enrollments')
+                    ->onDelete('cascade');
     }
 
     /**

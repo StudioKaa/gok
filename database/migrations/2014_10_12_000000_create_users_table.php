@@ -23,6 +23,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        $table->foreign('enrollment_id')
+                    ->references('id')->on('enrollments')
+                    ->onDelete('cascade');
     }
 
     /**

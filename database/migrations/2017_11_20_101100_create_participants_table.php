@@ -22,6 +22,10 @@ class CreateParticipantsTable extends Migration
             $table->date('birthday');
             $table->string('diet')->nullable();
             $table->timestamps();
+
+            $table->foreign('enrollment_id')
+                    ->references('id')->on('enrollments')
+                    ->onDelete('cascade');
         });
     }
 
