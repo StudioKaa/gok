@@ -57,8 +57,8 @@ class MySqlDump extends Command
 
         exec($command);
 
-        Mail::raw('test', function ($message) use ($path, $file){
-            $message->to('bartjroos@gmail.com')->attach($path . $file);
+        Mail::raw('Backup from GOK', function ($message) use ($path, $file){
+            $message->subject('GOK backup: ' . $file)->to('bartjroos@gmail.com')->attach($path . $file);
         });
     }
 }
