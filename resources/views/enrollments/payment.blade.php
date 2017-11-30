@@ -32,6 +32,7 @@
                 <select name="terms" id="terms" class="form-control">
                     <option value="1">Ik betaal in &eacute;&eacute;n keer (uiterlijk 1 februari, &euro;0,20 transactiekosten)</option>
                     <option value="2">Ik betaal in twee termijnen (uiterlijk 1 februari / 1 mei, &euro;0,40 transactiekosten)</option>
+                    <optgroup label=""></optgroup>
                 </select>
             </div>
         </div>
