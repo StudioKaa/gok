@@ -22,11 +22,11 @@ class CreateUsersTable extends Migration
             $table->integer('enrollment_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
-        });
 
-        $table->foreign('enrollment_id')
+            $table->foreign('enrollment_id')
                     ->references('id')->on('enrollments')
                     ->onDelete('cascade');
+        });
     }
 
     /**

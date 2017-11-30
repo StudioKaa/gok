@@ -21,11 +21,11 @@ class CreateAddressesTable extends Migration
             $table->string('postal_code');
             $table->string('city');
             $table->timestamps();
-        });
 
-        $table->foreign('enrollment_id')
+            $table->foreign('enrollment_id')
                     ->references('id')->on('enrollments')
                     ->onDelete('cascade');
+        });
     }
 
     /**
