@@ -28,7 +28,7 @@
 		</div>
 		<div class="col-sm-4">
 			<h4>{{ $count['ideal'] }}</h4>
-			<p>Aantal iDEAL</p>
+			<p>Betaald met iDEAL</p>
 		</div>
 	</div>
 </div>

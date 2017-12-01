@@ -28,7 +28,7 @@ class StatsController extends Controller
         })->count();
         $count['e35'] = $count['total'] - $count['e15'];
 
-        $count['ideal'] = Term::whereNotNull('mollie_id')->count();
+        $count['ideal'] = Term::whereNotNull('mollie_id')->where('state', Term::STATE_PAYED)->count();
 
         Lava::AreaChart('inschrijvingen', $this->getEnrollmentsTable(), [
             'title' => 'Aantal inschrijvingen',
