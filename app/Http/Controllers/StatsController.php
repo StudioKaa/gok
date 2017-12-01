@@ -37,10 +37,31 @@ class StatsController extends Controller
             ]
         ]);
 
+        Lava::PieChart('equipment', $this->getEquipmentTable(), [
+            'is3D' => false,
+            'title' => 'Kampeermiddelen'
+        ]);
+
         return view('stats')
             ->with('count', $count)
             ->with('enrollments', $enrollments)
             ->with('participants', $participants);
+    }
+
+    public function getEquipmentTable()
+    {
+        $graph = Lava::DataTable();
+        $graph->addStringColumn('label')
+              ->addNumberColumn('count');
+
+        $counts = DB::select("SELECT COUNT(id) AS count, equipment FROM `enrollments` GROUP BY(equipment)");
+
+        foreach ($counts as $count)
+        {
+            $graph->addRow([$count->equipment, $count->count]);
+        }
+
+        return $graph;
     }
 
     public function getEnrollmentsTable()

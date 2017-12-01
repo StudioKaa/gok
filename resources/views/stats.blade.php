@@ -31,8 +31,14 @@
 			<p>Betaald met iDEAL</p>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-12">
+			<div id="equipment-graph"></div>
+		</div>
+	</div>
 </div>
 
 @areachart('inschrijvingen', 'enrollment-graph')
+@piechart('equipment', 'equipment-graph')
 
 @endsection
