@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Enrollment;
 use App\Participant;
+use App\Term;
 use Khill\Lavacharts\Laravel\LavachartsFacade as Lava;
 use DB;
 use DateTime;
@@ -21,6 +22,14 @@ class StatsController extends Controller
             $query->where('state', Enrollment::STATE_ENROLLED);
         })->get();
 
+        $count['total'] = $participants->count();
+        $count['e15'] = $participants->filter(function ($participant, $key){
+            return $participant->birthday > new DateTime('2014-06-01');
+        })->count();
+        $count['e35'] = $count['total'] - $count['e15'];
+
+        $count['ideal'] = Term::whereNotNull('mollie_id')->count();
+
         Lava::AreaChart('inschrijvingen', $this->getEnrollmentsTable(), [
             'title' => 'Aantal inschrijvingen',
             'legend' => [
@@ -29,6 +38,7 @@ class StatsController extends Controller
         ]);
 
         return view('stats')
+            ->with('count', $count)
             ->with('enrollments', $enrollments)
             ->with('participants', $participants);
     }
@@ -51,7 +61,7 @@ class StatsController extends Controller
                     FROM enrollments AS e
                     GROUP BY e_date;");
 
-        $begin = new DateTime('2017-11-25');
+        $begin = new DateTime('2017-11-25   ');
         $end = new DateTime('+1 day');
         $range = new DatePeriod($begin, new DateInterval('P1D') ,$end);
 
