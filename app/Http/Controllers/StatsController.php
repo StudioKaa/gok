@@ -55,7 +55,7 @@ class StatsController extends Controller
         $graph->addStringColumn('label')
               ->addNumberColumn('count');
 
-        $counts = DB::select("SELECT COUNT(id) AS count, equipment FROM `enrollments` GROUP BY(equipment)");
+        $counts = DB::select("SELECT COUNT(id) AS count, equipment FROM `enrollments` WHERE state = ".Enrollment::STATE_ENROLLED." GROUP BY(equipment)");
 
         foreach ($counts as $count)
         {
