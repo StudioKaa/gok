@@ -51,7 +51,7 @@ class StatsController extends Controller
                     FROM enrollments AS e
                     GROUP BY e_date;");
 
-        $begin = new DateTime('2017-11-30');
+        $begin = new DateTime('2017-11-25');
         $end = new DateTime('+1 day');
         $range = new DatePeriod($begin, new DateInterval('P1D') ,$end);
 
