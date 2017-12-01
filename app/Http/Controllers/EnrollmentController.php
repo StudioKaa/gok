@@ -100,10 +100,10 @@ class EnrollmentController extends Controller
                 $address->title .= $member->{'Lid achternaam'};
             }
 
-            //Set address
-            $address->street = $member->{'Lid straat'} . ' ' . $member->{'Lid huisnummer'} . $member->{'Lid toevoegsel huisnr'};;
-            $address->postal_code = $member->{'Lid postcode'};
-            $address->city = $member->{'Lid plaats'};
+            // //Set address (MAJOR PRIVACY CONCERN)
+            // $address->street = $member->{'Lid straat'} . ' ' . $member->{'Lid huisnummer'} . $member->{'Lid toevoegsel huisnr'};;
+            // $address->postal_code = $member->{'Lid postcode'};
+            // $address->city = $member->{'Lid plaats'};
         }
 
         return view('enrollments.contact')
