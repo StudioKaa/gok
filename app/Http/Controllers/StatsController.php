@@ -39,7 +39,8 @@ class StatsController extends Controller
 
         Lava::PieChart('equipment', $this->getEquipmentTable(), [
             'is3D' => false,
-            'title' => 'Kampeermiddelen'
+            'title' => 'Kampeermiddelen',
+            'pieSliceText' => 'value'
         ]);
 
         return view('stats')
