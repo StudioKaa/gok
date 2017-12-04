@@ -30,7 +30,14 @@ class LetterController extends Controller
     		602670200, 	//Stefan
     		602691870, 	//Jolanda
     		602836619, 	//Bianca
-    		603207737, 	//Marjolaine	
+    		603207737, 	//Marjolaine
+    		603287894, 	//Bouwsma	
+    		602228583,	//Egdom
+    		603169930,	//Van den Heuvel
+    		602094702,	//Rooijackers
+    		602660432,	//Schoenmakers
+    		603073911,	//Sammie
+    		603281129,	//De Waard
     	);
 
     	$members = Member::whereNotIn('Lidnummer', $excluded)->orderBy('Speleenheid')->get();
