@@ -14,7 +14,7 @@
 	</div>
 	<div class="row">
 		<div class="col-12">
-			<div id="enrollment-graph"></div>
+			<div id="participant-graph"></div>
 		</div>
 	</div>
 	<div class="row">
@@ -38,7 +38,7 @@
 	</div>
 </div>
 
-@areachart('inschrijvingen', 'enrollment-graph')
+@areachart('participants', 'participant-graph')
 @piechart('equipment', 'equipment-graph')
 
 @endsection

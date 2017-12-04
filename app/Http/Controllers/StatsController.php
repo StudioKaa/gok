@@ -30,8 +30,8 @@ class StatsController extends Controller
 
         $count['ideal'] = Term::whereNotNull('mollie_id')->where('state', Term::STATE_PAYED)->count();
 
-        Lava::AreaChart('inschrijvingen', $this->getEnrollmentsTable(), [
-            'title' => 'Aantal inschrijvingen',
+        Lava::AreaChart('participants', $this->getEnrollmentsTable(), [
+            'title' => 'Aantal deelnemers',
             'legend' => [
                 'position' => 'none'
             ]
@@ -69,7 +69,7 @@ class StatsController extends Controller
     {
         $enrollments_graph = Lava::DataTable();
         $enrollments_graph->addDateColumn('datum')
-                   ->addNumberColumn('# inschrijvingen');
+                   ->addNumberColumn('# deelnemers');
 
         $counts = DB::select("SELECT
                        DATE(e.created_at) AS e_date,
