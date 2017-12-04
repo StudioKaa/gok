@@ -68,6 +68,8 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::get('/terms', 'Admin\TermController@index')->name('admin.terms.index');
 		Route::get('/terms/{term}/pay', 'Admin\TermController@pay')->name('admin.terms.pay');
 
+		Route::get('/print/invites', 'LetterController@invites');
+
 	});
 
 });

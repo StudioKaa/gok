@@ -8,6 +8,7 @@ use App\User;
 use App\Address;
 use App\Term;
 use Auth;
+use Carbon\Carbon;
 
 class Enrollment extends Model
 {
@@ -146,5 +147,51 @@ class Enrollment extends Model
                 'title' => 'Onbekend'
             );
         }
+    }
+
+    public function paymentLines()
+    {
+        $lines = array();
+        $total = 0;
+
+        foreach($this->participants()->whereDate('birthday', '<', '2014-06-01')->get() as $p)
+        {
+            $lines[] = array(
+                'name' => "{$p->name} ({$p->birthday})",
+                'price' => '35'
+            );
+            $total += 35;
+        }
+
+        foreach($this->participants()->whereDate('birthday', '>=', '2014-06-01')->get() as $p)
+        {
+            $lines[] = array(
+                'name' => "{$p->name} ({$p->birthday})",
+                'price' => '15'
+            );
+            $total += 15;
+        }
+
+        if($this->equipment == 'hire')
+        {
+            $lines[] = array(
+                'name' => "Tent huren",
+                'price' => '15'
+            );
+            $total += 15;
+        }
+
+        if($this->created_at < new Carbon('2018-03-01'))
+        {
+            $lines[] = array(
+                'name' => "Gratis muntje voor early-bird",
+                'price' => '0'
+            );
+        }
+
+        return array(
+            'total' => $total,
+            'lines' => $lines
+        );
     }
 }

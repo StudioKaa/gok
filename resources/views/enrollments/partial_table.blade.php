@@ -21,6 +21,7 @@
 	<div class="row my-header">
 		<div class="col-12">Deelnemers</div>
 	</div>
+	<?php $payment = $member->enrollment->paymentLines(); ?>
 	@foreach($payment['lines'] as $line)
 	    <div class="row">
 	        <div class="col-9">{{ $line['name'] }}</div>
