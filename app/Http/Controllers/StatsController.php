@@ -76,16 +76,16 @@ class StatsController extends Controller
                        count(e.id) AS daily,
                        (
                           SELECT 
-                             COUNT(id)
-                          FROM enrollments 
+                            COUNT(id)
+                          FROM participants 
                           WHERE DATE(created_at) <= e_date
-                          AND state = " . Enrollment::STATE_ENROLLED . "
+                          AND enrollment_id IN(SELECT id FROM enrollments WHERE state = " . Enrollment::STATE_ENROLLED . ")
                        ) as total
-                    FROM enrollments AS e
-                    WHERE state = " . Enrollment::STATE_ENROLLED . "
+                    FROM participants AS e
+                    WHERE enrollment_id IN(SELECT id FROM enrollments WHERE state = " . Enrollment::STATE_ENROLLED . ")
                     GROUP BY e_date;");
 
-        $begin = new DateTime('2017-11-25   ');
+        $begin = new DateTime('2017-11-25');
         $end = new DateTime('+1 day');
         $range = new DatePeriod($begin, new DateInterval('P1D') ,$end);
 
