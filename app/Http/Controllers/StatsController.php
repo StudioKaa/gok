@@ -79,8 +79,10 @@ class StatsController extends Controller
                              COUNT(id)
                           FROM enrollments 
                           WHERE DATE(created_at) <= e_date
+                          AND state = " . Enrollment::STATE_ENROLLED . "
                        ) as total
                     FROM enrollments AS e
+                    WHERE state = " . Enrollment::STATE_ENROLLED . "
                     GROUP BY e_date;");
 
         $begin = new DateTime('2017-11-25   ');
