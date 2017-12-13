@@ -184,7 +184,7 @@ class Enrollment extends Model
         if($this->created_at < new Carbon('2018-03-01'))
         {
             $lines[] = array(
-                'name' => "Gratis muntje voor early-bird",
+                'name' => $this->participants->count(). "x gratis muntje voor early-birds",
                 'price' => '0'
             );
         }

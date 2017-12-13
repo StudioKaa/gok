@@ -143,48 +143,7 @@ class EnrollmentController extends Controller
 
     public static function paymentLines($enrollment)
     {
-        $lines = array();
-        $total = 0;
-
-        foreach($enrollment->participants()->whereDate('birthday', '<', '2014-06-01')->get() as $p)
-        {
-            $lines[] = array(
-                'name' => "{$p->name} ({$p->birthday})",
-                'price' => '35'
-            );
-            $total += 35;
-        }
-
-        foreach($enrollment->participants()->whereDate('birthday', '>=', '2014-06-01')->get() as $p)
-        {
-            $lines[] = array(
-                'name' => "{$p->name} ({$p->birthday})",
-                'price' => '15'
-            );
-            $total += 15;
-        }
-
-        if($enrollment->equipment == 'hire')
-        {
-            $lines[] = array(
-                'name' => "Tent huren",
-                'price' => '15'
-            );
-            $total += 15;
-        }
-
-        if($enrollment->created_at < new Carbon('2018-03-01'))
-        {
-            $lines[] = array(
-                'name' => "Gratis muntje voor early-bird",
-                'price' => '0'
-            );
-        }
-
-        return array(
-            'total' => $total,
-            'lines' => $lines
-        );
+        return $enrollment->paymentLines();
     }
 
     public function payment($slug)
