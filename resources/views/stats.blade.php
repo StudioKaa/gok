@@ -36,6 +36,19 @@
 			<div id="equipment-graph"></div>
 		</div>
 	</div>
+	<div class="row">
+		<p><strong>Dieeten</strong></p>
+		<div class="col-12">
+			<table class="table table-striped">
+				@foreach($diets as $diet)
+					<tr>
+						<td>{{ $diet->diet }}</td>
+						<td>{{ $diet->n }}</td>
+					</tr>
+				@endforeach
+			</table>
+		</div>
+	</div>
 </div>
 
 @areachart('participants', 'participant-graph')

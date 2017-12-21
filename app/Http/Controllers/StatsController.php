@@ -46,7 +46,14 @@ class StatsController extends Controller
         return view('stats')
             ->with('count', $count)
             ->with('enrollments', $enrollments)
-            ->with('participants', $participants);
+            ->with('participants', $participants)
+            ->with('diets', $this->getDiets());
+    }
+
+    public function getDiets()
+    {
+        $counts = DB::select("SELECT diet, COUNT(*) AS n FROM `participants` WHERE diet IS NOT NULL AND enrollment_id IN (SELECT id FROM enrollments WHERE state = " . Enrollment::STATE_ENROLLED . ") GROUP BY diet");
+        return $counts;
     }
 
     public function getEquipmentTable()
