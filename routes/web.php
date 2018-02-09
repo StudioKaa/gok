@@ -68,6 +68,9 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::get('/terms', 'Admin\TermController@index')->name('admin.terms.index');
 		Route::get('/terms/{term}/pay', 'Admin\TermController@pay')->name('admin.terms.pay');
 
+		Route::get('/enrollments/remind', 'Admin\RemindController@show')->name('admin.remind.show');
+		Route::post('/enrollments/remind', 'Admin\RemindController@send')->name('admin.remind.send');
+
 		Route::get('/print/invites', 'LetterController@invites');
 
 	});
