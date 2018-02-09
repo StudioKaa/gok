@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Auth;
 
-class EnrollmentComplete extends Mailable
+class PaymentReminder extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -37,10 +37,10 @@ class EnrollmentComplete extends Mailable
             'email' => $this->enrollment->cp_email
         )));
 
-        return $this->subject('Scouting Raamsdonksveer - Inschrijving G.O.K.')
+        return $this->subject('Betalingsherinnering G.O.K. - Scouting Raamsdonksveer')
             ->cc('gok@scoutingrveer.nl')
             ->replyTo('gok@scoutingrveer.nl', 'Team GOK')
-            ->view('enrollments.email.complete')
+            ->view('enrollments.email.remind')
             ->with('payment', $this->payment)
             ->with('enrollment', $this->enrollment)
             ->with('base64', $base64);

@@ -6,6 +6,7 @@ use App\Enrollment;
 use App\Term;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mail;
 
 class RemindController extends Controller
 {
@@ -18,7 +19,10 @@ class RemindController extends Controller
 
     public function send()
     {
-        return $this->getLateEnrollments();
+        foreach ($this->getLateEnrollments() as $enrollment)
+        {
+            Mail::to($enrollment->cp_email)->send(new \App\Mail\PaymentReminder($enrollment, $enrollment->paymentLines()));
+        }
     }
 
     private function getLateEnrollments()
