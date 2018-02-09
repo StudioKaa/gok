@@ -23,6 +23,8 @@ class RemindController extends Controller
         {
             Mail::to($enrollment->cp_email)->send(new \App\Mail\PaymentReminder($enrollment, $enrollment->paymentLines()));
         }
+
+        return 'done!';
     }
 
     private function getLateEnrollments()
