@@ -2,7 +2,7 @@
 
 @section('content')
 	
-	<div class="activity-grid">
+	<div class="activity-grid mb-4">
 	
 	@foreach($activities as $activity)
 		<div class="card mb-4">

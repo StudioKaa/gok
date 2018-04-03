@@ -32,7 +32,7 @@ class ActivityController extends Controller
     private function fix_data(Request $request)
     {
         $data = $request->all();
-        $data['price'] = ($data['price'] <= 0) ? null : str_replace(',', '.', $data['price']);
+        $data['price'] = ($data['price'] <= 0 || $date['price'] == 'gratis') ? null : str_replace(',', '.', $data['price']);
         $request->replace($data);
 
         $this->validate($request, [
