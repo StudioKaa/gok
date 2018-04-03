@@ -73,9 +73,11 @@ header{
 
 @media (min-width: 576px) {
 	.activity-grid{
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		grid-gap: 0 1.5em;
+		column-count: 2;
+		column-gap: 1.5em;
+	}
+	.activity-grid > *{
+		break-inside: avoid;
 	}
 }
 
