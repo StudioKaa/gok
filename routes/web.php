@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::get('/ideal/webhook', 'IdealController@webhook');
 Route::get('/statistieken', 'StatsController@show');
+Route::get('/activiteiten', 'ActivityController@index');
 
 Route::get('/logout', function(){
 	Auth::logout();

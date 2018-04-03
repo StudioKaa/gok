@@ -71,6 +71,14 @@ header{
 	margin: 3em 0;
 }
 
+@media (min-width: 576px) {
+	.activity-grid{
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 0 1.5em;
+	}
+}
+
 @media (max-width: 576px) {
 	h1{
 		font-size: 8vw;
