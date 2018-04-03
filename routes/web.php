@@ -18,6 +18,10 @@ Route::get('/', function(){
 	{
 		return view('home');
 	}
+	elseif (Auth::user()->admin)
+	{
+		return redirect()->route('admin.home');
+	}
 	elseif (Auth::user()->enrollment->state < \App\Enrollment::STATE_ENROLLED)
 	{
 		return redirect('/enrollments/my/continue');
