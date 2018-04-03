@@ -26,7 +26,27 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        return view('admin.activities.create');
+        return view('admin.activities.form')->with('activity', new Activity());
+    }
+
+    private function fix_data(Request $request)
+    {
+        $data = $request->all();
+        $data['price'] = ($data['price'] <= 0) ? null : str_replace(',', '.', $data['price']);
+        $request->replace($data);
+
+        $this->validate($request, [
+            'order' => 'required|integer',
+            'title' => 'required',
+            'duration' => 'required|in:1,2',
+            'price' => 'nullable|numeric',
+            'age' => 'required',
+            'location_generic' => 'required',
+            'description' => 'required',
+            'image' => 'image|nullable'
+        ]);
+
+        return $request;
     }
 
     /**
@@ -37,31 +57,16 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validate(request(), [
-            'order' => 'required|integer|unique:activities',
-            'title' => 'required',
-            'duration' => 'required|in:1,2',
-            'price' => 'required|numeric',
-            'age' => 'required',
-            'location_generic' => 'required',
-            'description' => 'required'
-        ]);
-
+        $this->validate($request, ['order' => 'unique:activities', 'image' => 'required|image']);
+        $request = $this->fix_data($request);
         $activity = Activity::create($request->all());
+
+        $path = $request->image->store('activities', 'public');
+        $activity->image = 'storage/' . $path;
+        $activity->save();
+
         return redirect()->route('admin.activities.index')
             ->with('status', ['success', 'Activiteit <strong>' . $activity->title . '</strong> toegevoegd!']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Activity  $activity
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Activity $activity)
-    {
-        //
     }
 
     /**
@@ -72,7 +77,7 @@ class ActivityController extends Controller
      */
     public function edit(Activity $activity)
     {
-        //
+        return view('admin.activities.form')->with('activity', $activity);
     }
 
     /**
@@ -84,7 +89,18 @@ class ActivityController extends Controller
      */
     public function update(Request $request, Activity $activity)
     {
-        //
+        $request = $this->fix_data($request);
+        $activity->fill($request->all());
+        
+        if ($request->hasFile('image'))
+        {
+            $path = $request->image->store('activities', 'public');
+            $activity->image = 'storage/' . $path;
+        }
+
+        $activity->save();
+        return redirect()->route('admin.activities.index')
+            ->with('status', ['success', 'Activiteit <strong>' . $activity->title . '</strong> opgeslagen!']);
     }
 
     /**
@@ -93,8 +109,19 @@ class ActivityController extends Controller
      * @param  \App\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Activity $activity)
+    public function destroy(Request $request)
     {
-        //
+        if(!is_array($request->delete))
+        {
+            return redirect()->back()->with('status', ['danger', 'Geen rijen geselecteerd']);
+        }
+
+        foreach($request->delete as $id)
+        {
+            $activity = Activity::find($id);
+            $activity->delete();
+        }
+
+        return redirect()->route('admin.activities.index')->with('status', ['success', count($request->delete) . ' rijen verwijderd']);
     }
 }

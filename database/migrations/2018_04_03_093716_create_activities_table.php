@@ -18,11 +18,12 @@ class CreateActivitiesTable extends Migration
             $table->integer('order');
             $table->string('title');
             $table->integer('duration');
-            $table->integer('price');
+            $table->integer('price')->nullable();
             $table->string('age');
             $table->text('skills');
             $table->text('particulars')->nullable();
             $table->text('description');
+            $table->text('image');
             $table->string('location_generic');
             $table->string('location_specific')->nullable();
             $table->timestamps();
