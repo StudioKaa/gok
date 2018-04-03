@@ -20,7 +20,7 @@ class CreateActivitiesTable extends Migration
             $table->integer('duration');
             $table->integer('price')->nullable();
             $table->string('age');
-            $table->text('skills');
+            $table->text('skills')->nullable();
             $table->text('particulars')->nullable();
             $table->text('description');
             $table->text('image');

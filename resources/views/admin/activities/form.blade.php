@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="skills" class="col-sm-3 col-form-label">Vaardigheden *:</label>
+            <label for="skills" class="col-sm-3 col-form-label">Vaardigheden:</label>
             <div class="col-sm-9">
                 <input type="text" name="skills" id="skills" class="form-control" value="{{ old('skills', $activity->skills) }}">
                 <small class="form-text text-muted">Vrije invoer.</small>

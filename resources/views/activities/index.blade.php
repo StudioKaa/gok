@@ -16,10 +16,12 @@
 		    		{{ $activity->location_generic }}, {{ $activity->duration }}
 		    	</p>
 		    	<p class="card-text">{{ $activity->description }}</p>
-		    	<p class="card-text">
-		    		<strong>Vaardigheden</strong><br>
-		    		{{ $activity->skills }}
-		    	</p>
+		    	@if(!empty($activity->skills))
+			    	<p class="card-text">
+			    		<strong>Vaardigheden</strong><br>
+			    		{{ $activity->skills }}
+			    	</p>
+			    @endif
 		  	</div>
 		</div>
 	@endforeach
