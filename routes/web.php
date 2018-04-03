@@ -75,6 +75,8 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::get('/enrollments/remind', 'Admin\RemindController@show')->name('admin.remind.show');
 		Route::post('/enrollments/remind', 'Admin\RemindController@send')->name('admin.remind.send');
 
+		Route::resource('activities', 'Admin\ActivityController', ['except' => ['show'], 'as' => 'admin']);
+
 		Route::get('/print/invites', 'LetterController@invites');
 
 	});

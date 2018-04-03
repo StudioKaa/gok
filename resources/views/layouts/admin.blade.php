@@ -30,6 +30,9 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.activities.index') }}">Activiteiten</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.enrollments.index') }}">Inschrijvingen</a>
                 </li>
                 <li class="nav-item">
@@ -55,6 +58,13 @@
 
     <div class="main">
         <div class="container">
+
+            @if (session('status'))
+                <div class="alert alert-{{ session('status')[0] }}">
+                    {!! session('status')[1] !!}
+                </div>
+            @endif
+
             @yield('content')
         </div>
     </div>
