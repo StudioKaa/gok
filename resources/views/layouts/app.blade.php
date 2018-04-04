@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/narrow-jumbotron.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
@@ -32,7 +34,13 @@
             </li>
           @else
             <li class="nav-item">
-              <a href="/enrollments/{{ Auth::user()->enrollment->slug }}/continue" class="nav-link">{{ Auth::user()->name }}</a>
+              <a href="{{ route('activities.show') }}" class="nav-link">Keuze-activiteiten</a>
+            </li>
+            <li class="nav-item">
+              <a href="/enrollments/{{ Auth::user()->enrollment->slug }}/continue" class="nav-link">Mijn inschrijving</a>
+            </li>
+            <li class="nav-item">
+              <span class="nav-link">{{ Auth::user()->enrollment->cp()->name }}</span>
             </li>
           @endif
           </ul>

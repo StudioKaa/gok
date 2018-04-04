@@ -64,6 +64,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/ideal/finish/{slug}', 'IdealController@finish')->name('ideal.finish');
 
 	Route::get('/activiteiten/aanmelden', 'ActivityController@enroll')->name('activities.enroll');
+	Route::post('/activiteiten/opslaan', 'ActivityController@save')->name('activities.save');
+	Route::get('/activiteiten/mijn', 'ActivityController@show')->name('activities.show');
 
 	Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
 
@@ -88,7 +90,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::get('/ideal/webhook', 'IdealController@webhook');
 Route::get('/statistieken', 'StatsController@show');
-Route::get('/activiteiten', 'ActivityController@index');
+Route::get('/activiteiten', 'ActivityController@index')->name('activities.index');
 Route::get('/action/{action}/user/{slug}', 'LoginController@action')->name('action')->middleware('signed');
 
 Route::get('/logout', function(){

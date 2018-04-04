@@ -56,7 +56,7 @@ class LoginController extends Controller
                 break;
             
             default:
-                return redirect()->route('enrollments.show', $enrollment->slug);
+                return redirect()->intended();
                 break;
         }
     }
@@ -72,7 +72,7 @@ class LoginController extends Controller
                 break;
             
             default:
-                return redirect()->route('enrollments.show', $enrollment->slug);
+                return redirect()->intended();
                 break;
         }
     }
