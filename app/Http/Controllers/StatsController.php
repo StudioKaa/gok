@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Enrollment;
 use App\Participant;
 use App\Term;
+use App\Activity;
 use Khill\Lavacharts\Laravel\LavachartsFacade as Lava;
 use DB;
 use DateTime;
@@ -47,12 +48,23 @@ class StatsController extends Controller
             ->with('count', $count)
             ->with('enrollments', $enrollments)
             ->with('participants', $participants)
-            ->with('diets', $this->getDiets());
+            ->with('diets', $this->getDiets())
+            ->with('preferences', $this->getActivityCounts());
     }
 
     public function getDiets()
     {
         $counts = DB::select("SELECT diet, COUNT(*) AS n FROM `participants` WHERE diet IS NOT NULL AND enrollment_id IN (SELECT id FROM enrollments WHERE state = " . Enrollment::STATE_ENROLLED . ") GROUP BY diet");
+        return $counts;
+    }
+
+    public function getActivityCounts()
+    {
+        $counts = array();
+        foreach (Activity::all() as $activity)
+        {
+            $counts["$activity->order. $activity->title"] = $activity->countPreferences();
+        }
         return $counts;
     }
 

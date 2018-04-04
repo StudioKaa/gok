@@ -49,6 +49,19 @@
 			</table>
 		</div>
 	</div>
+	<div class="row">
+		<p><strong>Voorkeuren keuze-activiteiten</strong></p>
+		<div class="col-12">
+			<table class="table table-striped">
+				@foreach($preferences as $title => $count)
+					<tr>
+						<td>{{ $title }}</td>
+						<td>{{ $count }}</td>
+					</tr>
+				@endforeach
+			</table>
+		</div>
+	</div>
 </div>
 
 @areachart('participants', 'participant-graph')
