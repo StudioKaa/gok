@@ -1,7 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
-	
+
+	<a class="btn btn-primary mb-2" href="{{ route('admin.remind.show') }}">
+		<i class="fa fa-envelope"></i> Betalingsherinneringen
+	</a>
+
 	<table class="table table-striped table-hover">
 		<tr>
 			<th>#</th>
