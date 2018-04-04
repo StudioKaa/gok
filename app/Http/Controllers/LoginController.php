@@ -10,7 +10,7 @@ class LoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except(['logout', 'action']);
     }
 
     public function showLoginForm()
@@ -53,6 +53,22 @@ class LoginController extends Controller
         switch ($action) {
             case 'pay':
                 return redirect()->route('ideal.pay', $enrollment->terms[0]->slug);
+                break;
+            
+            default:
+                return redirect()->route('enrollments.show', $enrollment->slug);
+                break;
+        }
+    }
+
+    public function action($action, $slug)
+    {
+        $enrollment = Enrollment::where('slug', $slug)->first();
+        Auth::login($enrollment->user);
+
+        switch ($action) {
+            case 'activities':
+                return redirect()->route('activities.enroll');
                 break;
             
             default:

@@ -63,6 +63,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/ideal/pay/{slug}', 'IdealController@redirect')->name('ideal.pay');
 	Route::get('/ideal/finish/{slug}', 'IdealController@finish')->name('ideal.finish');
 
+	Route::get('/activiteiten/aanmelden', 'ActivityController@enroll')->name('activities.enroll');
+
 	Route::group(['middleware' => 'admin', 'prefix' => 'admin'], function() {
 
 		Route::redirect('/', '/admin/enrollments')->name('admin.home');
@@ -87,6 +89,7 @@ Route::group(['middleware' => 'auth'], function() {
 Route::get('/ideal/webhook', 'IdealController@webhook');
 Route::get('/statistieken', 'StatsController@show');
 Route::get('/activiteiten', 'ActivityController@index');
+Route::get('/action/{action}/user/{slug}', 'LoginController@action')->name('action')->middleware('signed');
 
 Route::get('/logout', function(){
 	Auth::logout();
