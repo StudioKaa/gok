@@ -14,7 +14,7 @@
 		    	<?php if(isset($_GET['show'])): ?>
 		    	<p class="card-text text-muted">
 		    		{{ ucfirst($activity->age) }}, {{ $activity->price }}<br />
-		    		{{ $activity->location_generic }}, {{ $activity->duration }}
+		    		{{ $activity->location_generic }}
 		    	</p>
 		    	<?php endif; ?>
 		    	<p class="card-text">{{ $activity->description }}</p>
