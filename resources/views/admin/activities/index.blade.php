@@ -16,6 +16,9 @@
 			<a class="btn btn-success" href="{{ route('admin.activities.create') }}">
 				<i class="fa fa-plus"></i> Nieuw
 			</a>
+			<a class="btn btn-primary" href="{{ route('admin.activities.invite') }}">
+				<i class="fa fa-envelope"></i> Verstuur uitnodigingen
+			</a>
 		</div>
 		
 

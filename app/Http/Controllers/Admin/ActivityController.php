@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Activity;
+use App\Enrollment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Mail;
 
 class ActivityController extends Controller
 {
@@ -119,5 +121,10 @@ class ActivityController extends Controller
         }
 
         return redirect()->route('admin.activities.index')->with('status', ['success', count($request->delete) . ' rijen verwijderd']);
+    }
+
+    public function invite()
+    {
+        Mail::to('bartjroos@gmail.com')->send(new \App\Mail\ActivityInvite(Enrollment::find(1)));
     }
 }

@@ -80,7 +80,8 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::post('/enrollments/remind', 'Admin\RemindController@send')->name('admin.remind.send');
 
 		Route::resource('activities', 'Admin\ActivityController', ['except' => ['show', 'delete'], 'as' => 'admin']);
-		Route::delete('activities', 'Admin\ActivityController@destroy')->name('admin.activities.delete');
+		Route::delete('/activities', 'Admin\ActivityController@destroy')->name('admin.activities.delete');
+		Route::get('/activities/invite', 'Admin\ActivityController@invite')->name('admin.activities.invite');
 
 		Route::get('/print/invites', 'LetterController@invites');
 
