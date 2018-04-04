@@ -21,7 +21,7 @@
 		    	<?php if(isset($_GET['show'])): ?>
 		    	@if(!empty($activity->skills))
 			    	<p class="card-text">
-			    		<strong>Vaardigheden</strong><br>
+			    		<strong>Dit moet je kunnen:</strong><br>
 			    		{{ $activity->skills }}
 			    	</p>
 			    @endif
