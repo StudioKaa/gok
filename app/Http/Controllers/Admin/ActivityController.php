@@ -131,7 +131,7 @@ class ActivityController extends Controller
 
     public function invite_send()
     {
-        $enrollments = Enrollment::where('state', Enrollment::STATE_ENROLLED)->get()
+        $enrollments = Enrollment::where('state', Enrollment::STATE_ENROLLED)->get();
         foreach ($enrollments as $enrollment)
         {
             Mail::to($enrollment->cp_email)->send(new \App\Mail\ActivityInvite($enrollment));
