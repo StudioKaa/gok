@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Activity_preference;
+use App\Activity_preference;
 
 class Activity extends Model
 {
