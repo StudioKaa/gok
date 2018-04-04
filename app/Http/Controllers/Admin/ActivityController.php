@@ -130,7 +130,7 @@ class ActivityController extends Controller
         {
             $enrollment = Enrollment::find($id);
             Mail::to($enrollment->cp_email)->send(new \App\Mail\ActivityInvite($enrollment));
-            echo "Mail verstuurd naar $enrollment->cp()->name voor #GOK$enrollment->slug <br />";
+            echo "Mail verstuurd naar $enrollment->cp_email voor #GOK$enrollment->slug <br />";
             sleep(2);
         }
 
