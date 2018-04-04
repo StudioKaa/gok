@@ -35,7 +35,7 @@ class ActivityController extends Controller
             'order' => 'required|integer',
             'title' => 'required',
             'duration' => 'required|in:1,2',
-            'price' => 'nullable',
+            'price' => 'nullable|numeric',
             'age' => 'required',
             'location_generic' => 'required',
             'description' => 'required',

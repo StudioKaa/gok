@@ -37,12 +37,13 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="price" class="col-sm-3 col-form-label">Prijs:</label>
+            <label for="price" class="col-sm-3 col-form-label">Prijs (exact pp):</label>
             <div class="col-sm-9">
                 <div class="input-group">
                   <span class="input-group-addon">&euro;</span>
                   <input type="text" class="form-control" name="price" id="price" value="{{ old('price', $activity->price) }}">
                 </div>
+                <small class="form-text text-muted">Gebruik een punt in plaats van komma.</small>
             </div>
         </div>
         <div class="form-group row">

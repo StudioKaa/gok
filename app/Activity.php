@@ -11,7 +11,7 @@ class Activity extends Model
     public function prettyPrice()
     {
     	if($this->price == null) return 'gratis';
-    	return '&euro;' . $this->price;
+    	return '&euro;' . $this->price . ' pp';
     }
 
     public function prettyDuration()
