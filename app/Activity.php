@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Activity_preference;
 
 class Activity extends Model
 {
@@ -23,6 +24,6 @@ class Activity extends Model
 
     public function countPreferences()
     {
-        return Activity_preference::where('round_1', $this->id)-orWhere('round_2', $this->id)->count();
+        return Activity_preference::where('round_1', $this->id)->orWhere('round_2', $this->id)->count();
     }
 }
