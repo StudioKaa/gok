@@ -131,6 +131,8 @@ class ActivityController extends Controller
             $enrollment = Enrollment::find($id);
             Mail::to($enrollment->cp_email)->send(new \App\Mail\ActivityInvite($enrollment));
         }
+
+        return redirect()->route('admin.activities.index')->with('status', ['success', 'Uitnodigingen verstuurd']);
         
     }
 }
