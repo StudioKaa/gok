@@ -49,6 +49,12 @@
       </header>
 
       <main role="main">
+        @if (session('status'))
+            <div class="alert alert-{{ session('status')[0] }}">
+                {!! session('status')[1] !!}
+            </div>
+        @endif
+        
         @yield('content')
       </main>
 

@@ -71,7 +71,7 @@ class ActivityController extends Controller
     		$preference->save();
     	}
 
-    	return redirect()->route('activities.show');
+    	return redirect()->route('activities.show')->with('status', ['success', 'Dankjewel, je voorkeuren zijn opgeslagen!']);
     }
 
     public function show()
