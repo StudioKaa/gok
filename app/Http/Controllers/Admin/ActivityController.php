@@ -123,7 +123,13 @@ class ActivityController extends Controller
         return redirect()->route('admin.activities.index')->with('status', ['success', count($request->delete) . ' rijen verwijderd']);
     }
 
-    public function invite()
+    public function invite_ask()
+    {
+        return view('admin.activities.invite')
+            ->with('count', Enrollment::where('state', Enrollment::STATE_ENROLLED)->count());
+    }
+
+    public function invite_send()
     {
         $team = [1, 2, 8, 28, 46, 54, 57];
         foreach ($team as $id)
@@ -131,7 +137,7 @@ class ActivityController extends Controller
             $enrollment = Enrollment::find($id);
             Mail::to($enrollment->cp_email)->send(new \App\Mail\ActivityInvite($enrollment));
             echo "Mail verstuurd naar $enrollment->cp_email voor #GOK$enrollment->slug <br />";
-            sleep(2);
+            sleep(3);
         }
 
         return redirect()->route('admin.activities.index')->with('status', ['success', 'Uitnodigingen verstuurd']);
