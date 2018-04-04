@@ -40,7 +40,7 @@
               <a href="/enrollments/{{ Auth::user()->enrollment->slug }}/continue" class="nav-link">Mijn inschrijving</a>
             </li>
             <li class="nav-item">
-              <span class="nav-link">{{ Auth::user()->enrollment->cp()->name }}</span>
+              <span class="nav-link">{{ optional(Auth::user()->enrollment->cp())->name }}</span>
             </li>
           @endif
           </ul>
