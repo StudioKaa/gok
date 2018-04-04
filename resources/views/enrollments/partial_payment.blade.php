@@ -1,4 +1,3 @@
-<h3>Betaalinstructie</h3>
 @foreach($enrollment->terms as $term)
 	@if($term->state == \App\Term::STATE_OPEN)
 	<div class="alert alert-success mt-4">

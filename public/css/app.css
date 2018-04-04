@@ -71,6 +71,10 @@ header{
 	margin: 3em 0;
 }
 
+span.collapsing{
+	display: block;
+}
+
 @media (min-width: 576px) {
 	.activity-grid{
 		column-count: 2;

@@ -24,6 +24,7 @@
 @endif
 
 @if($enrollment->paymentHTML['color'] != 'success')
+	<h3>Betaalinstructie</h3>
 	@include('enrollments.partial_payment')
 @endif
 
