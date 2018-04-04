@@ -38,11 +38,12 @@ class ActivityController extends Controller
     	$enrollment->save();
 
     	$payment = 0;
+        $dependencies = $request->dep ?? array();
 
     	foreach ($request->pref as $participant => $pref)
     	{
     		//skip this one if it has a parent itself
-    		if(array_key_exists($participant, $request->dep)) break;
+    		if(array_key_exists($participant, $dependencies)) break;
 
     		$preference = Activity_preference::firstOrNew(['participant_id' => $participant]);
     		$preference->participant_id = $participant;
@@ -52,7 +53,7 @@ class ActivityController extends Controller
     		$preference->save();
     	}
 
-    	foreach ($request->dep as $participant => $depends_on)
+    	foreach ($dependencies as $participant => $depends_on)
     	{
     		//prevent double dependencies
     		if(array_key_exists($depends_on, $request->dep))
