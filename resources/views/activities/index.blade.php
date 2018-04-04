@@ -13,7 +13,7 @@
 		    	<h5 class="card-title">{{ $activity->title }}</h5>
 		    	<?php if(isset($_GET['show'])): ?>
 		    	<p class="card-text text-muted">
-		    		{{ ucfirst($activity->age) }}, {{ $activity->price }}<br />
+		    		{{ ucfirst($activity->age) }}, {{ $activity->prettyPrice() }}<br />
 		    		{{ $activity->location_generic }}
 		    	</p>
 		    	<?php endif; ?>

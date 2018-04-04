@@ -8,16 +8,16 @@ class Activity extends Model
 {
     protected $guarded = ['id'];
 
-    public function getPriceAttribute($value)
+    public function prettyPrice()
     {
-    	if($value == null) return 'gratis';
-    	return '&euro;' . $value;
+    	if($this->price == null) return 'gratis';
+    	return '&euro;' . $this->price;
     }
 
-    public function getDurationAttribute($value)
+    public function prettyDuration()
     {
-    	$word = $value == 1 ? 'ronde' : 'rondes';
-    	$time = $value * 2;
-    	return "$value $word ($time uur)";
+    	$word = $this->duration == 1 ? 'ronde' : 'rondes';
+    	$time = $this->duration * 2;
+    	return "{$this->duration} $word ($time uur)";
     }
 }
