@@ -36,7 +36,7 @@
 					<td><input type="checkbox" name="delete[]" value="{{ $activity->id }}"></td>
 					<td>{{ $activity->order }}</td>
 					<td>{{ $activity->title }}</td>
-					<td>&nbsp;</td>
+					<td>{{ $activity->countPreferences() }}x</td>
 					<td>
 						<a class="btn btn-primary" href="{{ route('admin.activities.edit', $activity->id) }}"><i class="fa fa-pencil"></i></a>
 					</td>

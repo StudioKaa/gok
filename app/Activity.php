@@ -20,4 +20,9 @@ class Activity extends Model
     	$time = $this->duration * 2;
     	return "{$this->duration} $word ($time uur)";
     }
+
+    public function countPreferences()
+    {
+        return Activity_preference::where('round_1', $this->id)-orWhere('round_2', $this->id)->count();
+    }
 }
