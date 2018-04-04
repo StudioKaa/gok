@@ -36,7 +36,7 @@
                     <a class="nav-link" href="{{ route('admin.enrollments.index') }}">Inschrijvingen</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.participants.index') }}">Deelnemers</a>
+                    <span class="nav-link">Deelnemers</span>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.terms.index') }}">Betalingen</a>
