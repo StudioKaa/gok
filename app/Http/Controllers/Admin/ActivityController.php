@@ -125,6 +125,12 @@ class ActivityController extends Controller
 
     public function invite()
     {
-        Mail::to('bartjroos@gmail.com')->send(new \App\Mail\ActivityInvite(Enrollment::find(1)));
+        $team = [1, 2, 8, 28, 46, 54, 57];
+        foreach ($team as $id)
+        {
+            $enrollment = Enrollment::find($id);
+            Mail::to($enrollment->cp_email)->send(new \App\Mail\ActivityInvite($enrollment));
+        }
+        
     }
 }
