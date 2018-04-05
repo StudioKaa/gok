@@ -44,12 +44,19 @@ class StatsController extends Controller
             'pieSliceText' => 'value'
         ]);
 
+        Lava::PieChart('arrival', $this->getArrivalTable(), [
+            'is3D' => false,
+            'title' => 'Aankomst',
+            'pieSliceText' => 'value'
+        ]);
+
         return view('stats')
             ->with('count', $count)
             ->with('enrollments', $enrollments)
             ->with('participants', $participants)
             ->with('diets', $this->getDiets())
-            ->with('preferences', $this->getActivityCounts());
+            ->with('preferences', $this->getActivityCounts())
+            ->with('arrival');
     }
 
     public function getDiets()
@@ -79,6 +86,22 @@ class StatsController extends Controller
         foreach ($counts as $count)
         {
             $graph->addRow([$count->equipment, $count->count]);
+        }
+
+        return $graph;
+    }
+
+    public function getArrivalTable()
+    {
+        $graph = Lava::DataTable();
+        $graph->addStringColumn('label')
+              ->addNumberColumn('count');
+
+        $counts = DB::select("SELECT COUNT(id) AS count, arrival FROM `enrollments` WHERE state = ".Enrollment::STATE_ENROLLED." GROUP BY(arrival)");
+
+        foreach ($counts as $count)
+        {
+            $graph->addRow([$count->arrival ?? 'onbekend', $count->count]);
         }
 
         return $graph;

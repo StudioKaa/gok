@@ -37,6 +37,11 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-12">
+			<div id="arrival-graph"></div>
+		</div>
+	</div>
+	<div class="row">
 		<p><strong>Dieeten</strong></p>
 		<div class="col-12">
 			<table class="table table-striped">
@@ -66,5 +71,6 @@
 
 @areachart('participants', 'participant-graph')
 @piechart('equipment', 'equipment-graph')
+@piechart('arrival', 'arrival-graph')
 
 @endsection
