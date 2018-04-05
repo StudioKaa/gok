@@ -21,7 +21,7 @@
 			</td>
 			<td>{{ $enrollment->address->title or '' }}</td>
 			<td>{{ count($enrollment->participants) }}</td>
-			<td>{!! ucfirst($enrollment->arrival ?? '<span class="badge badge-warning">onbekend</span>') !!}</td>
+			<td>{!! ucfirst($enrollment->arrival ?? '<span class="badge badge-secondary">onbekend</span>') !!}</td>
 			<td>
 				@if($enrollment->paymentHTML['color'] == 'success')
 					Betaald
