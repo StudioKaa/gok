@@ -12,7 +12,10 @@
 				<img class="card-img-top" src="{{ asset($activity->image) }}" alt="{{ $activity->title }}">
 			@endif
 		  	<div class="card-body">
-		    	<h5 class="card-title">{{ $activity->order }}. {{ $activity->title }}</h5>
+		    	<h5 class="card-title">
+		    		{{ $activity->order }}. {{ $activity->title }}
+		    		@if($activity->popular) <span class="badge badge-success">populair</span> @endif
+		    	</h5>
 		    	<p class="card-text text-muted">
 		    		{{ ucfirst($activity->age) }}, {!! $activity->prettyPrice() !!}<br />
 		    		{{ $activity->location_generic }}

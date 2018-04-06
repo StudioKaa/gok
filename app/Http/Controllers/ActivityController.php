@@ -9,12 +9,25 @@ use App\Term;
 use App\Activity_preference;
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 
 class ActivityController extends Controller
 {
     public function index()
     {
-        $activities = Activity::all();
+        $q = "
+        SELECT * FROM activities LEFT JOIN (
+            SELECT activities.id, c.count AS popular FROM activities LEFT JOIN ( 
+                SELECT id, COUNT(id) AS count FROM ( 
+                    SELECT a.id, a.title, p.participant_id FROM activities AS a LEFT JOIN activity_preferences p ON p.round_1 = a.id WHERE p.id IS NOT NULL
+                    UNION
+                    SELECT a.id, a.title, p.participant_id FROM activities AS a LEFT JOIN activity_preferences p ON p.round_2 = a.id WHERE p.id IS NOT NULL
+                ) AS t GROUP BY id
+            ) AS c ON c.id = activities.id ORDER BY count DESC LIMIT 3
+        ) AS e ON e.id = activities.id ORDER BY activities.order ASC
+        ";
+
+        $activities = Activity::hydrate(DB::select($q));
         return view('activities.index')->with('activities', $activities);
     }
 
