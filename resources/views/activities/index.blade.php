@@ -14,7 +14,7 @@
 		  	<div class="card-body">
 		    	<h5 class="card-title">
 		    		{{ $activity->order }}. {{ $activity->title }}
-		    		@if($activity->popular) <span class="badge badge-success">populair</span> @endif
+		    		<!--@if($activity->popular) <span class="badge badge-success">populair</span> @endif-->
 		    	</h5>
 		    	<p class="card-text text-muted">
 		    		{{ ucfirst($activity->age) }}, {!! $activity->prettyPrice() !!}<br />
