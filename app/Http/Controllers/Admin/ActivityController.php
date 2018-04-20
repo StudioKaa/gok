@@ -126,7 +126,8 @@ class ActivityController extends Controller
     public function invite_ask()
     {
         return view('admin.activities.invite')
-            ->with('count', Enrollment::where('state', Enrollment::STATE_ENROLLED)->count());
+            ->with('count_invite', Enrollment::where('state', Enrollment::STATE_ENROLLED)->count())
+            ->with('count_remind', Enrollment::where('state', Enrollment::STATE_ENROLLED)->whereNull('arrival')->count());
     }
 
     public function invite_send()
@@ -139,7 +140,21 @@ class ActivityController extends Controller
             sleep(3);
         }
 
-        return redirect()->route('admin.activities.index')->with('status', ['success', 'Uitnodigingen verstuurd']);
+        return redirect()->route('admin.activities.index')->with('status', ['success', 'Uitnodigingen verstuurd']);   
+    }
+
+    public function invite_remind()
+    {
         
+        $enrollments = Enrollment::where('state', Enrollment::STATE_ENROLLED)->whereNull('arrival')->get();
+
+        foreach ($enrollments as $enrollment)
+        {
+            Mail::to($enrollment->cp_email)->send(new \App\Mail\ActivityRemind($enrollment));
+            echo "Mail verstuurd naar $enrollment->cp_email voor #GOK$enrollment->slug <br />";
+            sleep(3);
+        }
+
+        return redirect()->route('admin.activities.index')->with('status', ['success', 'Herinneringen verstuurd']);   
     }
 }

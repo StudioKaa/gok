@@ -82,7 +82,8 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::resource('activities', 'Admin\ActivityController', ['except' => ['show', 'delete'], 'as' => 'admin']);
 		Route::delete('/activities', 'Admin\ActivityController@destroy')->name('admin.activities.delete');
 		Route::get('/activities/invite', 'Admin\ActivityController@invite_ask')->name('admin.activities.invite_ask');
-		Route::post('/activities/invite', 'Admin\ActivityController@invite_send')->name('admin.activities.invite_send');
+		Route::post('/activities/invite_send', 'Admin\ActivityController@invite_send')->name('admin.activities.invite_send');
+		Route::post('/activities/invite_remind', 'Admin\ActivityController@invite_remind')->name('admin.activities.invite_remind');
 
 		Route::get('/print/invites', 'LetterController@invites');
 

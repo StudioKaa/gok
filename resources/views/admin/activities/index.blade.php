@@ -17,7 +17,7 @@
 				<i class="fa fa-plus"></i> Nieuw
 			</a>
 			<a class="btn btn-primary" href="{{ route('admin.activities.invite_ask') }}">
-				<i class="fa fa-envelope"></i> Verstuur uitnodigingen
+				<i class="fa fa-envelope"></i> Verstuur uitnodigingen / herinnering
 			</a>
 		</div>
 		
