@@ -45,7 +45,7 @@
 							<td>{{ $enrollment->cp()->name }}</td>
 							<td>{{ $enrollment->participants->count() }}</td>
 							<td>
-								{{ ucfirst($enrollment->equipment) }} 
+								{{ ucfirst($enrollment->equipment_nice()) }} 
 								@unless(empty($enrollment->equipment_size))
 									/ {{ $enrollment->equipment_size }} 
 								@endunless

@@ -46,6 +46,11 @@ class Enrollment extends Model
         return $this->hasMany(Term::class);
     }
 
+    public function equipment_nice()
+    {
+        return ($this->equipment == 'hire') ? 'huurtent' : $this->equipment;
+    }
+
     public static function getBySlug($slug)
     {
         if(Auth::user()->admin)
