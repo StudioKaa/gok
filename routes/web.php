@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function() {
 		Route::post('/activities/invite_remind', 'Admin\ActivityController@invite_remind')->name('admin.activities.invite_remind');
 
 		Route::get('/print/invites', 'LetterController@invites');
+		Route::get('/print/gids', 'LetterController@gids');
 
 	});
 

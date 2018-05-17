@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Member;
+use App\Enrollment;
 
 class LetterController extends Controller
 {
@@ -42,5 +43,11 @@ class LetterController extends Controller
 
     	$members = Member::whereNotIn('Lidnummer', $excluded)->orderBy('Speleenheid')->get();
     	return view('letters.invite')->with('members', $members);
+    }
+
+    public function gids()
+    {
+        $enrollments = Enrollment::where('state', Enrollment::STATE_ENROLLED)->get();
+        return view('letters.gids')->with(compact('enrollments'));
     }
 }
