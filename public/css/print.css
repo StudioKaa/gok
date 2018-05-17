@@ -10,7 +10,7 @@
 	padding-right: 13mm;
 	padding-left: 13mm;
 	display: grid;
-	grid-template-rows: 14mm 31mm 5mm 35mm 1fr 38mm;
+	grid-template-rows: 14mm 31mm 15mm 30mm 1fr 38mm;
 }
 .print > .page.back{
 	padding: 13mm;
@@ -27,12 +27,12 @@ header img{
 .address{
 	grid-row-start: 4;
 	margin-left: 7mm;
-	padding-left: 5mm;
-	width: 75mm;
+	width: 100mm;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	padding-bottom: 8mm;
 }
 
 .address > *{
@@ -45,6 +45,16 @@ header img{
 	margin-top: 10mm;
 	grid-row-start: 5;
 	text-align: justify;
+	position: relative;
+}
+
+.entrance-ticket{
+	position: absolute;
+	bottom: 0;
+}
+
+hr{
+	border-color: black;
 }
 
 .content.pull-up{
