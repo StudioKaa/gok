@@ -14,16 +14,20 @@
 	        </div>
 			<div class="content">
 				<p>Beste G.O.K.'ers,</p>
-				<p>Het is bijna zover, over twee weken barst het feest los! In deze enveloppe vindt je de campinggids met daarin allerlei praktische informatie in die je voor én tijdens het weekend nodig hebt. Lees de gids dus van tevoren door en neem 'm zeker ook mee naar de G.O.K.!</p>
+				<p>Het is bijna zover, over twee weken barst het feest los! In deze enveloppe vindt je de campinggids met daarin allerlei praktische informatie in die je voor én tijdens het weekend nodig hebt. Lees de gids dus van tevoren door en neem 'm zeker ook mee naar de G.O.K.! Heb je nog vragen of opmerkingen? Stuur dan vooral een mailtje naar <a href="#">gok@scoutingrveer.nl</a>.</p>
 				
 				<h3>Tickets</h3>
-				<p>De tickets voor de activiteiten op zaterdag krijg je bij aankomst. Helaas konden niet alle activiteiten doorgaan. Hieronder zie je alvast welke tickets jullie krijgen.</p>
+				<p>De tickets voor de activiteiten op zaterdag krijg je bij aankomst. Helaas konden niet alle activiteiten doorgaan. Hieronder zie je alvast welke tickets jullie krijgen:</p>
 				
 				<table style="width: 100%">
-					<tr>
-						<td>Bart Roos</td>
-						<td>Blaat</td>
-					</tr>
+					@foreach($enrollment->participants as $participant)
+						<tr>
+							<td>{{ $participant->name }}</td>
+							<td>{{ $participant->tickets[0]->activity->title ?? 'geen' }}</td>
+							<td>en</td>
+							<td>{{ $participant->tickets[1]->activity->title ?? 'geen' }}</td>
+						</tr>
+					@endforeach
 				</table>
 				
 				<div class="entrance-ticket">

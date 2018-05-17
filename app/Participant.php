@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Enrollment;
 use App\Activity_preference;
+use App\Ticket;
 
 class Participant extends Model
 {
@@ -23,6 +24,11 @@ class Participant extends Model
     public function activity_preference()
     {
         return $this->hasOne(Activity_preference::class);
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class)->orderBy('round');
     }
 
     public function getIsAdultAttribute()
