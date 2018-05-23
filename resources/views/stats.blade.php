@@ -58,6 +58,12 @@
 		<p><strong>Aantal groepen per activiteit</strong></p>
 		<div class="col-12">
 			<table class="table table-striped">
+				<tr>
+					<th>Nr.</th>
+					<th>Naam</th>
+					<th>Ronde</th>
+					<th># groepen</th>
+				</tr>
 				@foreach($tickets as $row)
 					<tr>
 						<td>{{ $row->activity_id }}</td>
