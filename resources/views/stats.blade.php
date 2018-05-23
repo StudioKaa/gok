@@ -54,10 +54,10 @@
 			</table>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" id="tickets">
 		<p><strong>Aantal groepen per activiteit</strong></p>
 		<div class="col-12">
-			<table class="table table-striped" name="tickets">
+			<table class="table table-striped">
 				<tr>
 					<th>Nr.</th>
 					<th>Naam</th>
