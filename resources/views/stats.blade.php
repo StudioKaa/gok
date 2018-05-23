@@ -63,6 +63,7 @@
 					<th>Naam</th>
 					<th>Ronde</th>
 					<th># groepen</th>
+					<th># deelnemers</th>
 				</tr>
 				@foreach($tickets as $row)
 					<tr>
@@ -70,6 +71,7 @@
 						<td>{{ $row->activity }}</td>
 						<td>{{ $row->round }}</td>
 						<td>{{ $row->count_enrollments }}</td>
+						<td>{{ $row->count_participants }}</td>
 					</tr>
 				@endforeach
 			</table>
