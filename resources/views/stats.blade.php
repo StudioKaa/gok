@@ -67,7 +67,7 @@
 				</tr>
 				@foreach($tickets as $row)
 					<tr>
-						<td>{{ $row->activity_id }}</td>
+						<td>{{ $row->activity_id }}.</td>
 						<td>{{ $row->activity }}</td>
 						<td>{{ $row->round }}</td>
 						<td>{{ $row->count_enrollments }}</td>
