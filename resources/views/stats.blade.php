@@ -77,7 +77,7 @@
 			</table>
 		</div>
 	</div>
-	<div class="row">
+	{{--<div class="row">
 		<p><strong>Voorkeuren keuze-activiteiten</strong></p>
 		<div class="col-12">
 			<table class="table table-striped">
@@ -89,7 +89,7 @@
 				@endforeach
 			</table>
 		</div>
-	</div>
+	</div>--}}
 </div>
 
 @areachart('participants', 'participant-graph')
