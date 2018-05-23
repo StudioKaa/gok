@@ -55,6 +55,21 @@
 		</div>
 	</div>
 	<div class="row">
+		<p><strong>Aantal groepen per activiteit</strong></p>
+		<div class="col-12">
+			<table class="table table-striped">
+				@foreach($tickets as $row)
+					<tr>
+						<td>{{ $row->id }}</td>
+						<td>{{ $row->activity }}</td>
+						<td>{{ $row->round }}</td>
+						<td>{{ $row->count_enrollments }}</td>
+					</tr>
+				@endforeach
+			</table>
+		</div>
+	</div>
+	<div class="row">
 		<p><strong>Voorkeuren keuze-activiteiten</strong></p>
 		<div class="col-12">
 			<table class="table table-striped">

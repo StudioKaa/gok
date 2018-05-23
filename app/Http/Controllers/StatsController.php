@@ -56,6 +56,7 @@ class StatsController extends Controller
             ->with('participants', $participants)
             ->with('diets', $this->getDiets())
             ->with('preferences', $this->getActivityCounts())
+            ->with('tickets', $this->getTicketCounts())
             ->with('arrival');
     }
 
@@ -73,6 +74,13 @@ class StatsController extends Controller
             $counts["$activity->order. $activity->title"] = $activity->countPreferences();
         }
         return $counts;
+    }
+
+    public function getTicketCounts()
+    {
+        //SELECT activity_id, activity, round, COUNT(DISTINCT enrollment) AS count_enrollments FROM tickets_integrated GROUP BY activity_id, round ORDER BY activity_id, round
+
+        return DB::select("SELECT * FROM `tickets_groups`");
     }
 
     public function getEquipmentTable()
