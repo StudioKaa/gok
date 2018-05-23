@@ -57,7 +57,7 @@
 	<div class="row">
 		<p><strong>Aantal groepen per activiteit</strong></p>
 		<div class="col-12">
-			<table class="table table-striped">
+			<table class="table table-striped" name="tickets">
 				<tr>
 					<th>Nr.</th>
 					<th>Naam</th>
