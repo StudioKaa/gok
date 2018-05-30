@@ -87,6 +87,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 		Route::get('/print/invites', 'LetterController@invites');
 		Route::get('/print/gids', 'LetterController@gids');
+		Route::get('/print/welkom', 'LetterController@welkom');
 
 	});
 

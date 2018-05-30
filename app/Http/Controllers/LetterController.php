@@ -50,4 +50,10 @@ class LetterController extends Controller
         $enrollments = Enrollment::where('state', Enrollment::STATE_ENROLLED)->get();
         return view('letters.gids')->with(compact('enrollments'));
     }
+
+    public function welkom()
+    {
+        $enrollments = Enrollment::where('state', Enrollment::STATE_ENROLLED)->get();
+        return view('letters.welkom')->with(compact('enrollments'));
+    }
 }
